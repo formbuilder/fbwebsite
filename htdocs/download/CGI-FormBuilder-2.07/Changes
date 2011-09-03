@@ -1,0 +1,148 @@
+
+NEW FEATURES
+
+New www.formbuilder.org website
+    First and foremost, an entire website has been created for
+    this module: www.formbuilder.org - check it out for examples,
+    tutorials, extended documentation, and more!
+
+Customizable messages
+    All new for 2.07 is the ability to completely customize every
+    message that FormBuilder outputs. This is enabled by the new
+    "messages" option you can specify to "new()". Each message is
+    given a unique tag, such as "js_invalid_checkbox", allowing you
+    to customize JavaScript errors, highlighted form fields, and
+    even fatal error messages.
+
+Single JavaScript alert
+    Thanks to inspiration from a big patch by Godfrey Carnegie, all
+    JavaScript validation alerts are wrapped into a single dialog,
+    greatly simplifying the user interface.
+
+New "jsfunc" interface
+    Up until this release, code specified to the "jsfunc" option was
+    appended to the native JavaScript. It is now prepended, allowing
+    you to easily override built-in validations. In addition, thanks
+    to the above, you can hook into the native error message engine
+    by appending to the string "alertstr" and incrementing "invalid".
+    Of course, simply issuing an "alert()" and "return false" still
+    works, so existing code should not be affected.
+
+New "HTML::Template" features
+    Support for "HTML::Template" has been enhanced by offering two
+    new tags: "<tmpl_var label-[field]>" and "<tmpl_var comment-[field]>"
+    for each field in your form. This allows you to precisely control
+    absolutely every aspect of HTML layout.
+
+New Template Toolkit feature
+    The new "[% form.field.[field].comment %]" tag has been added,
+    allowing you to control placement of comments in your template.
+
+Automatic "-select-" generated for lists
+    Now, select lists automatically get a "-select-" element prepended
+    when their type is auto-determined. To disable this behavior, set
+    "smartness => 0" in "new()".
+
+Addition of "delete" option to "field()"
+    This is like the "CGI.pm" "delete()" function, only I didn't
+    see a reason to make a separate method. This permanently clears
+    the field, just like you had never specified it in the first place.
+    To use it, specify "delete => 1" to "field()".
+
+Ability to access fields as "$form->field_name()"
+    That's right, thanks to a trick with autoloading, if you define
+    a field named "company_id", you can now directly access it by
+    calling "$form->company_id()", where the resulting function takes
+    any arguments you can specify to "field()", and returns the same
+    as well.
+
+New "cgi_header" function
+    This just redispatches to "CGI.pm", but it allows you more HTML
+    freedom and a better header by calling "$form->cgi_header". The
+    "header" option to "new()" is unaffected, still defaulting to 0.
+
+CHANGES
+
+Field "type" no longer determined by default
+    A field's "type" is no longer determined by default simply based on
+    its name. For example, before if you had a field called 'details',
+    it would become a "textarea". This behavior is still present, but
+    you must explicitly set "smartness => 2" in "new()". This does NOT
+    affect the automatic check for options and layout, which is still on
+    by default, and will be for the forseeable future.
+
+No more annoying '(required)' in templates
+    This annoying 'feature' has been removed, since it was ruining
+    templates. It is now up to you to decide how to display which
+    fields are required if you are using a template. (Hint: One easy
+    way is to twiddle the "comment" option to "field()".)
+
+More sensible debug levels
+    For some reason, everything had migrated into "debug" level 2. I
+    shuffled around the messages slightly to give better debug output
+    under level 1. The default remains 0.
+
+The "sortopts" option will now accept "1"
+    Heck, this was throwing even ME off, and I wrote it. In addition
+    to "alpha" or "numeric", "sortopts" will also accept "1", which
+    defaults to an alpha sort. You can also use "NAME" or "NUM", to
+    be more consistent with other built-in stuff (i.e. "validate").
+
+The "keepextras" option will now accept an arrayref
+    If you specify an arrayref to "keepextras", this will be used as a
+    list of non-fields that should be preserved as hidden input params.
+    In the past, you could only preserve all or no extra params. This
+    is most useful for multi-screen applications, where you want to keep
+    certain extra params like "mode" but where you may not want to keep
+    everything specified.
+
+The "options" argument now has built-ins (ala "validate")
+    Taking a cue from "validate", there are now a couple option lists
+    that are built-in by default. These can be specified to the "options"
+    argument to "field()".
+
+The "sessionid()" function now sets sessionid's as well
+    This method is little-used, but if you are making use of sessions
+    you will probably find the ability to easily set them via FormBuilder
+    useful.
+
+The quick CGI::Minimal no longer used
+    Sorry, everyone, but it has too many differences from "CGI.pm",
+    and is preventing progress for FormBuilder.
+
+BUG FIXES
+
+Fixed a longstanding bug in values with "force" option
+    This would only be hit in extreme edge cases, but man was it bugging
+    me (haha). It's fixed now - successive calls to "field()" and 
+    "render()" utilizing the "value" option work as they should.
+
+Several edge-case bugs with values fixed
+    Default values and options have been extensively tested and retested
+    and should, finally, be completely stable.
+
+Several JavaScript bugs fixed
+    There were several miscellaneous JavaScript bugs, including
+    the "jsfunc" tag getting placed in the "<form>" tag, disabling
+    JavaScript causing other problems, and the wrong DOM being used
+    for a "checkbox". All are fixed.
+
+Body "text" attribute fixed
+    If you were trying to layout HTML natively with FormBuilder, and
+    were specifying the "text" tag to the "body" option, this was
+    horribly broken. It is now fixed.
+
+Built-In "FNAME" Regex Fixed
+    Before it required "[- ]" somewhere in the name, which is obviously
+    not quite right.
+
+ACKNOWLEDGEMENTS
+
+Thanks To All Those Who Helped
+    I want to extend a special thanks to everyone that has sent me
+    bug reports and patches over the past 6 months, and apologize for
+    taking so long to get this version together. Hopefully with the
+    establishment of the formbuilder.org website and mailing list, this
+    will speed things up. Special thanks to Jakob Curdes, Godfrey Carnegie,
+    and Dan Collis Puro for their excellent feedback and bug fixes. Thanks!
+

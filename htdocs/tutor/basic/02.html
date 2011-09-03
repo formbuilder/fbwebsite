@@ -1,0 +1,50 @@
+A Simple Form
+
+A simple FormBuilder application looks like the following:
+
+<pre>
+#!/usr/bin/perl
+
+use CGI::FormBuilder;
+
+@fields = qw(first_name last_name email phone);
+
+$form = CGI::FormBuilder->new(
+             fields => \@fields,
+        );
+
+if ($form->submitted && $form->validate) {
+    # you would write code here to act on the form data
+    $fname = $form->field('first_name');
+    $lname = $form->field('last_name');
+
+    print $form->confirm(header => 1);
+} else {
+    print $form->render(header => 1);
+}
+</pre>
+
+
+First, we define our fields, and create a new <code>$form</code>
+object specifying those fields (we have to backslash our <code>\@fields</code>
+array so that it's passed in one piece). FormBuilder then takes them, creates
+human-readable labels for each field, and lays everything out in an
+HTML table automatically via the <code>$form-&gt;render</code> method.
+In fact, FormBuilder even titles the name of the form based on the
+name of the script! (<code>personal_info.pl</code> becomes "Personal Info").
+<p>
+When the user hits the "Submit" button, <code>$form-&gt;submitted</code>
+will return true, which in our example above would also cause
+<code>$form-&gt;validate</code> to execute (due to the <code>&&</code> in
+the <code>if</code> statement). If both return true, it means valid form data
+was submitted, and you can then do whatever you need to do with that data.
+<p>
+Getting to the form data is as easy as using the <code>field()</code>
+method in a way similar to <code>CGI.pm</code>'s <code>param()</code>
+function. The <code>field()</code> function has numerous other
+uses too, as we will see later.
+<p>
+Stop for a second and <a href="/ex/simple_form.pl" onClick="miniwin(this)">see this in action</a>.
+Then, check out the <a href="/ex/source.pl?f=simple_form.pl" onClick="miniwin(this)">HTML generated</a>
+by this application before going on to the next step.
+

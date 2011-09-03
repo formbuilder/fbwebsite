@@ -1,0 +1,4 @@
+<!--#include virtual="/layout/header.html"-->
+<p class="label">404 Not Found</p>
+The requested document was not found. Better luck next time!
+<!--#include virtual="/layout/footer.html"-->

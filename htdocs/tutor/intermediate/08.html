@@ -1,0 +1,58 @@
+JavaScript Actions 2
+
+We saw earlier how JavaScript actions could be attached to fields by
+using <code>jsclick</code>. Similar functionality is provided for your top-level
+form as well. Instead of using <code>onSubmit</code>, two other options can be
+specified to <code>new()</code>:
+<ul>
+    <li><code>jsfunc</code> - JavaScript code placed inside FormBuilder's validate function
+    <li><code>jshead</code> - JavaScript code placed inside <code>&lt;head&gt;</code>
+</ul>
+Let's look at how each is used.
+<p>
+In our preceding example, we wanted to change how we validate the form 
+depending on what submit button was clicked. It would be nice if we could skip validation
+entirely if the user hits "Cancel", and it would also be nice to pop up a special
+confirmation box if the user hits "Delete", to prevent accidents. No problem:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => \@fields,
+             submit => [qw/Update Delete Cancel/],
+             reset  => 0,         # turn off reset button
+             <b>jsfunc => &lt;&lt;EOJS
+
+if (form._submit.value == "Delete") {
+    if (confirm("Really DELETE this entry?")) return true;
+    return false;
+} else if (form._submit.value == "Cancel") {
+    return true;    
+}
+
+EOJS</b>
+        );
+</pre>
+
+The value of the submit button is held in the special field
+<code>form._submit.value</code>. If the user clicks "Delete",
+then a dialog box will pop up, asking them to confirm their
+selection. If they hit "Ok", then it will <code>return true</code> (skipping
+validation). Otherwise, it will <code>return false</code> (failing validation).
+<p>
+If the user hits "Cancel", then it will again <code>return true</code>,
+skipping all validation. The JavaScript you specify to <code>jsfunc</code>
+is inserted <i>before</i> FormBuilder's generated JavaScript, so
+controlling validation is easy:
+<ul>
+    <li>To fail validation, preventing submit: <code>return false</code>
+    <li>To skip all validation, allowing submit: <code>return true</code>
+    <li>To allow validation to proceed normally: do nothing
+</ul>
+You should view <a href="/ex/multiple_submits.pl" onClick="miniwin(this)">this script in action</a>,
+to get a better feel for how this works. Make sure to <a href="/ex/source.pl?f=multiple_submits.pl"
+onClick="miniwin(this)">view the HTML source</a> as well.
+<p>
+The <code>jshead</code> option really deserves little mention. This allows
+you to insert arbitrary JavaScript code into the start of your document.
+However, FormBuilder will not call this code ever, so it's rarely useful.

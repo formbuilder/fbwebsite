@@ -1,0 +1,19 @@
+<!-- email_form.tmpl -->
+<head>
+<title>foo.com</title>
+<tmpl_var js-head> <!-- JavaScript validation code -->
+<head>
+<body bgcolor="black" text="white">
+<font face="times,serif">
+<p>
+Hi! Welcome to foo.com! Please tell us some basic info:
+<p>
+<tmpl_var form-start>
+Your Name: <tmpl_var field-name><br>
+Your Email: <tmpl_var field-email><br>
+<p>
+Join Mailing List? <tmpl_var field-mlist>
+<p>
+When you're done, hit the "Submit" button below:<br>
+<tmpl_var form-reset> <tmpl_var form-submit> <!-- buttons -->
+<tmpl_var form-end>

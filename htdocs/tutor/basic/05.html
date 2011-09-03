@@ -1,0 +1,68 @@
+Field Options
+
+By default, all fields are of type <code>text</code>, again, just
+like the HTML spec says. This has worked so far, but often you'll
+want a <code>select</code> list, set of <code>checkbox</code>es, etc.
+<p>
+This is one area where FormBuilder really shines: <b>input field
+abstraction</b>. Make sure you understand this next part.
+<p>
+FormBuilder maintains all form fields as data entities. Not
+"checkboxes", but <i>fields</i>. FormBuilder will actually
+decide for you what the best HTML representation is based
+on the number of <i>options</i> a field has. When a field has
+no options (the default case), then the field is a simple
+<code>text</code> input. The more options you specify,
+the more extensive the representation to the user.
+<p>
+To change the number of options, you use the <code>field()</code>
+method. Remember earlier when we mentioned it had a number of
+uses? Any time you want to change an individual field's properties,
+you use <code>field()</code>. For example:
+
+<pre>
+@options = qw(Subscribe Unsubscribe);
+$form->field(name => 'mailing_list',
+             <b>options => \@options</b>);      <b># add options</b>
+</pre>
+
+Here, we've given the <code>mailing_list</code> field two options:
+"Subscribe" or "Unsubscribe". Since there are only two options,
+they will be presented in a <code>radio</code> group, like so:
+
+<pre>
+&lt;input name="mailing_list" type="radio" value="Subscribe"&gt; Subscribe 
+&lt;input name="mailing_list" type="radio" value="Unsubscribe"&gt; Unsubscribe
+</pre>
+
+FormBuilder is smart enough to automatically change the HTML
+representation from <code>text</code> to <code>radio</code>,
+just because it sees options for the field! And if you were
+to specify several more options, it would automatically change
+the field to a <code>select</code> list. Finally, a single-option
+list will become a <code>checkbox</code>, since this allows the
+user to deselect it.
+<p>
+While FormBuilder does all this for you, if you want to force
+something to be a specific HTML input type, you can do so very
+easily. Simply specify the <code>type</code> argument to <code>field()</code>:
+
+<pre>
+$form->field(name => 'mailing_list',
+             <b>type => 'select'</b>,
+             options => \@options);
+</pre>
+
+This would force <code>mailing_list</code> to be represented as
+a <code>select</code> list. Before you do this, though, I encourage you to play
+around with FormBuilder's "smartness" a little, you just may like it. :-)
+<p>
+Regardless, in all cases you get to the data the exact same way:
+
+<pre>
+$mlist = $form->field('mailing_list');
+</pre>
+
+FormBuilder addresses all data as fields - it doesn't care if something's
+a select list, textarea, or file upload. Getting to the data is always
+done the same way.

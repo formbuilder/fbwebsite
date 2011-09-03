@@ -1,0 +1,42 @@
+***************
+*** 749,759 ****
+  }
+  EOJS
+  
+!         # Must set our onSubmit to call validate()
+          # Unfortunately, this introduces the requirement that script()
+          # must be generated/called before start() in our template engines.
+          # Fortunately, that usually happens anyways. Still sucks.
+!         $self->{onSubmit} ||= "return $jsname(this);";
+      }
+  
+      # set <script> now to the expanded javascript
+--- 749,759 ----
+  }
+  EOJS
+  
+!         # Must set our onsubmit to call validate()
+          # Unfortunately, this introduces the requirement that script()
+          # must be generated/called before start() in our template engines.
+          # Fortunately, that usually happens anyways. Still sucks.
+!         $self->{onsubmit} ||= "return $jsname(this);";
+      }
+  
+      # set <script> now to the expanded javascript
+***************
+*** 784,790 ****
+      if (ref $self->{submit} eq 'ARRAY') {
+          # multiple buttons + JavaScript - dynamically set the _submit value
+          my @oncl = $self->{javascript}
+!                        ? (onClick => "this.form.$sn.value = this.value;") : ();
+          for my $s (autodata $self->{submit}) {
+              push @submit, { name => $sn, type => 'submit', value => $s, @oncl };
+          }
+--- 784,790 ----
+      if (ref $self->{submit} eq 'ARRAY') {
+          # multiple buttons + JavaScript - dynamically set the _submit value
+          my @oncl = $self->{javascript}
+!                        ? (onclick => "this.form.$sn.value = this.value;") : ();
+          for my $s (autodata $self->{submit}) {
+              push @submit, { name => $sn, type => 'submit', value => $s, @oncl };
+          }

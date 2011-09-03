@@ -1,0 +1,49 @@
+Default Values
+
+Intelligent handling of defaults is another one of FormBuilder's real
+strengths. It's another painful task that FormBuilder makes very easy.
+<p>
+Let's assume you want to create a form that allows a customer to update
+their contact information, as basically every company must do. This info
+is stored in a database, and you want to create an easy interface to it.
+<p>
+Doing so is easy:
+
+<pre>
+#!/usr/bin/perl
+
+use DBI;
+use CGI::FormBuilder;
+
+$user = $ENV{REMOTE_USER};        # from .htaccess
+$dbh  = DBI->connect(...);        # your db here
+$sth  = $dbh->prepare("select * from pers where user = $user");
+<b>$defs = $sth->fetchrow_hashref;</b>
+
+@fields = qw(first_name last_name email phone
+             address city state zip mail_list);
+
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => \@fields,
+             <b>values => $defs,     # values from hashref</b>
+             required => 'ALL'
+        );
+
+<b># Setup attributes for some fields</b>
+$form->field(name => 'state', options => \@states);
+$form->field(name => 'zip', size => 10, maxlength => 10);
+$form->field(name => 'mail_list', options => [qw/Yes No/]);
+
+# No confirmation to demonstrate stickiness
+print $form->render(header => 1);
+</pre>
+
+By adding the <code>values</code> option, FormBuilder will walk the
+hashref specified, search it <i>case-insensitively</i> for matching fields,
+and automatically populate your form. The correct <code>select</code>
+options will be selected, <code>checkbox</code>es checked, and so on.
+<p>
+You should really <a href="/ex/default_values.pl" onClick="miniwin(this)">see this in action</a>
+before continuing. Notice how the CGI values override the defaults from
+the database across multiple submissions.

@@ -1,0 +1,81 @@
+Custom Headers
+
+If you've been paying attention, you've noticed that all of our
+<code>print</code> statements have specified the <code>header</code>
+option:
+
+<pre>
+if ($form->submitted) {
+    print $form->confirm(header => 1);
+} else {
+    print $form->render(header => 1);
+}
+</pre>
+
+This automatically generates a CGI header for you, along with some leading
+HTML like a title, body tag, and so forth.
+<p>
+But often, you'll want to include your form as part of a bigger
+page, possibly with its own navbar, images, stylesheets, and
+so on.
+<p>
+In this case, you should turn off the <code>header</code> option by
+simply omitting it. Then, use some other module to generate your 
+header and leading HTML. The only trick you have to remember is that when
+you use FormBuilder with other CGI modules, you have to tell it
+explicitly where to get the CGI request parameters from by
+using the <code>params</code> option:
+
+<pre>
+#!/usr/bin/perl
+
+use CGI;
+use CGI::FormBuilder;
+
+@fields = qw(username password confirm_password);
+
+<b>$query = CGI->new;                 # must use OO version</b>
+$form  = CGI::FormBuilder->new(
+              fields => \@fields,
+              <b>params => $query,    # get CGI params from CGI.pm</b>
+              font   => 'verdana'
+         );
+
+<b>print $query->header;              # use CGI.pm header</b>
+
+# open and print your custom HTML
+open H, "&lt;header.html";
+print while &lt;H&gt;;
+close H;
+
+if ($form->submitted) {
+    <b>print $form->confirm;          # no header option</b>
+} else {
+    <b>print $form->render;           # no header option</b>
+}
+
+</pre>
+
+You have to use the Object-Oriented calling style of <code>CGI.pm</code>,
+so that FormBuilder can still get to the CGI parameters even after <code>CGI.pm</code>
+has already processed them. Don't worry, <code>CGI.pm</code> is still easy to use.
+Just prefix your normal calls to CGI functions with the string <code>$query-&gt;</code>.
+For example:
+
+<pre>
+use CGI qw/:standard/;                # standard
+
+use CGI;                              # 00 form
+$query = CGI->new;                    # 00 form
+
+$name = param('name');                # standard
+$name = $query->param('name');        # 00 form
+
+print header();                       # standard
+print $query->header;                 # 00 form
+</pre>
+
+Remember, you <b>only</b> have to do this if you're generating your own
+custom headers. In fact, there are even <i>better</i> ways to get the proper
+HTML layout using Templates, as we will see in the "Advanced" section.
+The above method is easy to use if you're looking for something simple.

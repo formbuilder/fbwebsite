@@ -1,0 +1,37 @@
+Exploiting render()
+
+So far, we have only seen one option to <code>render()</code>, the
+<code>header</code> argument used to turn headers on or off. 
+However, <code>render()</code> is much more powerful and accepts
+many more options.
+<p>
+In fact, <code>render()</code> will accept <i>the exact same options
+as new().</i> This means that you can specify some options to
+<code>new()</code>, and others to <code>render()</code>, depending
+on what you're trying to do. 
+<p>
+Here's a brief example of how this might come in handy:
+
+<pre>
+#!/usr/bin/perl
+
+use CGI::FormBuilder;
+
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => [qw/name email mlist/],
+        );
+
+$form->field(name => 'mlist', options => [qw/Yes No/],
+             value => 'Yes');
+
+if ($form->submitted) {
+    # you would write code here to act on the form data
+    print $form->confirm(<b>template => 'email_success.tmpl'</b>);
+} else {
+    print $form->render(<b>template => 'email_form.tmpl'</b>)
+}
+</pre>
+
+In fact, there are other important uses of this flexibility with
+multi-screen applications, as we'll see next.

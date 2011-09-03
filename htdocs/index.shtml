@@ -1,0 +1,119 @@
+<!--#include virtual="/layout/header.html"-->
+
+Welcome to formbuilder.org, the official website for the Perl CGI Form Builder
+module, aka FormBuilder!
+
+<p class="label">What is FormBuilder?</p>
+FormBuilder is an extremely fast, reliable form generation and processing module
+written by <a href="/contrib/author.pl">Nate Wiger</a>, with numerous other 
+<a href="/contrib/">contributors</a>. Make sure you read through the
+<a href="/tutor/">tutorial</a> and <a href="mailto:fbusers-subscribe@formbuilder.org">join
+the users mailing list</a> to learn more about FormBuilder.
+<xiframe src="/layout/paypal.html"></iframe>
+
+<p class="label">News</p>
+<xiframe align="right" src="/layout/paypal.html" width="200" height="100"
+ frameborder="none" border="0"></xiframe>
+<b><i>03/01/2007</i> - FormBuilder 3.0501 released</b> An important update that
+fixes a memory leak affecting Catalyst users
+(<a href="/download/relnotes.pl?r=3.0501">3.0501 Release Notes</a>).
+<a href="/download/CGI-FormBuilder-3.0501.tgz" class="mark">Download FormBuilder 3.0501</a>.<br />
+<p>
+<b><i>12/18/2006</i> - FormBuilder 3.05 released!</b> Fieldsets, Catalyst support, table-free
+&lt;div&gt; rendering (<a href="/download/relnotes.pl?r=3.05">3.05 Release Notes</a>).
+Happy Holidays - enjoy.
+<a href="/download/CGI-FormBuilder-3.05.tgz" class="mark">Download FormBuilder 3.05</a>.<br />
+<p>
+<b><i>08/31/2006</i> - FormBuilder 3.04 released!</b>
+Several new features (<a href="/download/relnotes.pl?r=3.0401">3.04 Release Notes</a>),
+including the <code>inflate</code> option to turn fields into objects on the fly,
+and a new <code>prepare()</code> method to give you complete access to FormBuilder's
+rendering hash, for easier integration with <a href="http://www.catalystframework.org">Catalyst</a>.
+<a href="/download/CGI-FormBuilder-3.0401.tgz" class="mark">Download FormBuilder 3.04</a>.<br />
+<p>
+<b><i>08/16/2006</i> - Catalyst FormBuilder plugin released!</b>
+A new plugin adds support for FormBuilder to <a href="http://www.catalystframework.org">Catalyst</a>.
+<a href="/download/Catalyst-Plugin-FormBuilder-1.03.tgz" class="mark">Download the plugin here</a>.
+If you haven't checked out Catalyst, you should - it's a real contender to Ruby on Rails.
+<p>
+<b><i>05/20/2006</i> - FormBuilder 3.0302 released!</b>
+This is a bugfix release over 3.03 that mainly addresses UTF8 issues.
+<a href="/download/CGI-FormBuilder-3.0302.tar.gz" 
+ class="mark">Download FormBuilder 3.0302</a>.<br />
+<p>
+<b><i>03/06/2006</i> - FormBuilder 3.03 released!</b>
+After a long wait, <a href="/download/CGI-FormBuilder-3.03.tar.gz" class="mark">FormBuilder 3.03 is here</a>.<br />
+Check it out! There's tons of new features in the <a href="/download/relnotes.pl?r=3.03">3.03 Release Notes</a>,
+including:
+<ul>
+    <li>Messages localization, including packaged messages for many languages</li>
+    <li>Subclassable fields</li>
+    <li><code>Data::FormValidator</code> support for validation (thanks Peter Eichman!)</li>
+    <li>Select field <code>optgroup</code> support</li>
+    <li>Option sorting by <code>LABELNAME</code> or <code>LABELNUM</code></li>
+    <li>Many bugfixes</li>
+</ul>
+<p>
+<b><i>04/29/2005</i> - FormBuilder 3.0202 is out!</b>
+<a href="/download/CGI-FormBuilder-3.0202.tar.gz" class="mark">Download 3.0202 here</a>.<br />
+This is a bugfix release over the <b>3.02</b> version that came out
+on <b>04/18</b> with the following gooey goodness.
+<ul>
+   <li>Multi-page form support</li>
+   <li>Per-field "other" and "growable" options</li>
+   <li>Autoloadable <code>$field()</code> subs (via <code>fieldsubs</code> option)</li>
+   <li>Ability to initialize FB from external config files</li>
+   <li>Addition of <code>CGI::FastTemplate</code> template engine</li>
+   <li>Character encoding dispatched to <code>HTML::Entities</code></li>
+   <li>Easy plug-in support for <code>CGI::Session</code></li>
+   <li>Truly subclassable template and messaging modules</li>
+   <li>Completely compliant XHTML output (validated)</li>
+</ul>
+For more info, read the <a href="/download/relnotes.pl?r=3.0202">3.0202 Release Notes</a>.
+</p>
+<p>The last version of FormBuilder in the 2.x tree is
+<a href="/download/CGI-FormBuilder-2.14.tar.gz" class="mark">2.14</a> (<a href="/download/relnotes.pl?r=2.14">release notes</a>). This version is very stable, although there are a few obscure edge-cases bugs. It works back to Perl 5.004, whereas Perl 5.6.0 or later is needed for the 3.x series.
+</p>
+<p class="label">Introduction</p>
+Do you hate generating, processing, and validating CGI forms? Do you love Perl?
+FormBuilder is the answer. It's an extremely fast, robust Perl module
+with a ridiculous set of <a href="/features/">features</a>. With FormBuilder,
+you can build an entire form application with nothing more than this:
+</p>
+<pre>
+#!/usr/bin/perl
+
+use CGI::FormBuilder;
+
+@fields = qw(first_name last_name email phone mailing_list);
+
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => \@fields,
+             validate => {
+                email => 'EMAIL',    # validate fields using
+                phone => 'PHONE',    # built-in patterns
+             },
+             required => 'ALL',
+        );
+
+# add options to our mailing list field 
+$form->field(name => 'mailing_list',
+             options => [qw/Subscribe Unsubscribe/]);
+
+if ($form->submitted) {
+    # you would write code here to act on the form data
+    $fname = $form->field('first_name');
+    $lname = $form->field('last_name');
+
+    print $form->confirm(header => 1);
+} else {
+    print $form->render(header => 1);
+}
+</pre>
+The resultant application is quite impressive, including HTML form generation,
+JavaScript validation code, Perl regex checks, automatic CGI "stickiness", and
+more. You can <a href="/ex/intro.pl" onClick="miniwin(this)">see it in action</a>, and
+<a href="/ex/source.pl?f=intro.pl&s=html" onClick="miniwin(this)">view the HTML generated</a>.
+
+<!--#include virtual="/layout/footer.html"-->

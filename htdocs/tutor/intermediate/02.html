@@ -1,0 +1,69 @@
+Perl References
+
+This really doesn't belong here, but there are very few concise
+explanations of references in Perl, and understanding them will
+really help you exploit FormBuilder.
+<p>
+Up until now, we've skirted the idea of references, mentioning
+in passing that you should just place a backslash in front of
+any arrays or hashes you need to pass into FormBuilder.
+<p>
+Doing so actually creates a <i>reference</i>. Taking a reference
+allows you to pass arrays and hashes around as scalars (singular
+values), which is needed in Perl 5 to keep them intact.
+In the examples, you've seen something similar to this:
+
+<pre>
+@fields = qw(name email);
+$form = CGI::FormBuilder->new(
+             fields => \@fields
+        );
+</pre>
+
+Here, <code>\@fields</code> is a reference. Specifically, it's an array
+reference, or "arrayref" for short.
+
+Similarly, we can do the same thing with hashes:
+
+<pre>
+%validate = (
+    name  => 'NAME';
+    email => 'EMAIL',
+);
+
+$form = CGI::FormBuilder->new(
+             fields   => \@fields,
+             validate => \%validate
+        );
+</pre>
+
+Here, <code>\%validate</code> is a hash reference, or "hashref".
+<p>
+There are two more types of references: "anonymous arrayrefs" and
+"anonymous hashrefs". These are created with <code>[]</code> and <code>{}</code>,
+respectively. For our purposes, there is no real difference between this code:
+
+<pre>
+@fields = qw(name email);
+%validate = (name => 'NAME', email => 'EMAIL');
+
+$form = CGI::FormBuilder->new(
+             fields   => \@fields,
+             validate => \%validate
+        );
+</pre>
+
+And this code:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             fields   => [ qw(name email) ],
+             validate => { name => 'NAME', email => 'EMAIL' }
+        );
+</pre>
+
+Except that the latter doesn't require that we first create 
+<code>@fields</code> and <code>%validate</code> variables.
+<p>
+Now back to our regularly-scheduled program...
+

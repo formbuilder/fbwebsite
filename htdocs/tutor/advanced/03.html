@@ -1,0 +1,86 @@
+HTML::Template
+
+<code>HTML::Template</code> is the simpler of the modules, and it was the first
+one FormBuilder offered support for. It does have a few limitations, although most
+people don't hit them.
+<p>
+With <code>HTML::Template</code>, you first create a separate HTML template document. Then,
+within that template, you specify variables as special HTML tags. These tags take
+the form <code>&lt;tmpl_var field-[name]&gt;</code> for each field. So, if you defined
+a field named "email", you would address it as <code>&lt;tmpl_var field-email&gt;</code>
+in your template.
+<p>
+In addition, there are a couple special form tags:
+<ul>
+    <li><code>&lt;tmpl_var js-head&gt;</code>     -  JavaScript to stick in <code>&lt;head&gt;</code>
+    <li><code>&lt;tmpl_var form-start&gt;</code>  -  Opening <code>&lt;form&gt;</code> tag w/ options
+    <li><code>&lt;tmpl_var form-submit&gt;</code> -  The submit button(s)
+    <li><code>&lt;tmpl_var form-reset&gt;</code>  -  The reset button
+    <li><code>&lt;tmpl_var form-end&gt;</code>    -  Just the closing <code>&lt;/form&gt;</code> tag
+</ul>
+Pulling these fields together, a simple template would look something like this:
+
+<pre>
+&lt;!-- email_form.tmpl --&gt;
+&lt;head&gt;
+&lt;title&gt;foo.com&lt;/title&gt;
+<b>&lt;tmpl_var js-head&gt; &lt;!-- JavaScript validation code --&gt;</b>
+&lt;head&gt;
+&lt;body bgcolor=black text=white&gt;
+&lt;font face="times,serif"&gt;
+&lt;p&gt;
+Hi! Welcome to foo.com! Please tell us some basic info:
+&lt;p&gt;
+<b>&lt;tmpl_var form-start&gt;</b>
+Your Name: <b>&lt;tmpl_var field-name&gt;</b>&lt;br&gt;
+Your Email: <b>&lt;tmpl_var field-email&gt;</b>&lt;br&gt;
+&lt;p&gt;
+Join Mailing List? <b>&lt;tmpl_var field-mlist&gt;</b>
+&lt;p&gt;
+When you're done, hit the "Submit" button below:&lt;br&gt;
+<b>&lt;tmpl_var form-reset&gt; &lt;tmpl_var form-submit&gt; &lt;!-- buttons --&gt;
+&lt;tmpl_var form-end&gt;</b>
+</pre>
+
+FormBuilder will automatically take care of expanding the fields appropriately.
+Regardless of whether they're <code>text</code> or <code>select</code> fields,
+the necessary HTML will be placed exactly where you specify it in your template.
+
+The corresponding FormBuilder code to use this template is simple:
+
+<pre>
+#!/usr/bin/perl
+
+use CGI::FormBuilder;
+
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => [qw/name email mlist/],
+             <b>template => 'email_form.tmpl'</b>
+        );
+
+# create a pair of Yes/No options, and choose Yes by default
+$form->field(name => 'mlist', options => [qw/Yes No/],
+             value => 'Yes');
+
+if ($form->submitted) {
+    # update our database and redirect them to the next page
+ 
+} else {
+    print $form->render(header => 1);
+}
+</pre>
+
+Of course, you can add any other options you want as well, such
+as <code>validate</code>.
+
+Take a look at <a href="/ex/email_form.pl" onClick="miniwin(this)">this script in action</a>,
+along with the <a href="/ex/source.pl?f=email_form.pl" onClick="miniwin(this)">HTML generated</a>.
+Notice the HTML looks identical to your template, with the exception that
+the <code>&lt;tmpl_var&gt;</code> fields have been expanded automatically.
+<!-- 050505: I don't think this is true anymore <p>
+Note that by default, FormBuilder will send a header with your template
+automatically. This is because your template should contain 100% of your
+HTML - you should not have any other prints in your FormBuilder code other
+than the <code>render()</code> line. If for some reason you want to turn off
+the header, you need to explicitly specify <code>header => 0</code> in <code>render()</code>. -->

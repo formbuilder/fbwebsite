@@ -1,0 +1,31 @@
+Multi-Screen Apps
+
+There are a couple different web design schools of thought. One school
+believes that you should create a separate script for every component
+of your site. That is, if you had a message board, you might have
+scripts called <code>newmesg.pl, editmesg.pl, viewmesg.pl, delmesg.pl</code>,
+and so on. Using FormBuilder with this methodology is simple - you would
+just create a separate <code>$form</code> object in each component.
+<p>
+Another school of thought believes that you should instead just
+place all of your code in a single script, and use a separate CGI
+parameter named something like <code>mode</code> or <code>action</code> to
+tell you what to do. The advantage of this method is that you only have to
+import your modules, connect to your database, and so forth in one
+central place.
+<p>
+If you want to use this methodology, FormBuilder can handle it as well.
+You have two options:
+<ol>
+    <p><li>Create a separate <code>CGI.pm $query</code> object, use
+           it to get your params, and then create your <code>$form</code>
+           objects with the <code>params</code> option.
+
+    <p><li>Create a single <code>$form</code> object, and get to the
+           other params with <code>$form->cgi_param</code>.
+</ol>
+Which way you go depends on one factor: Whether or not your different
+application screens require different fields. If so, then you want
+to use the first methodology. Otherwise, use the second one.
+<p>
+Let's look at each alternative.

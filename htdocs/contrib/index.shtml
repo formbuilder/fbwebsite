@@ -1,0 +1,73 @@
+<!--#include virtual="/layout/header.html"-->
+
+<p class="label">How to Contribute</p>
+Contributing to FormBuilder is really easy! Here are the steps:
+<ol>
+    <li>Use FormBuilder for a while, and find a bug or feature you'd like added/fixed</li>
+    <li><a href="http://groups.google.com/group/perl-formbuilder">Join the FormBuilder Google Group</a>
+        and post a message about it, to make sure it's a viable addition and is
+        not already being worked on</li>
+    <li>Provide a patch created via <code>diff -u</code>. <i>Important: Use the
+        <code>-u</code> option or you'll have to redo the patch!</i></li>
+    <li>After it's been integrated, you'll be added to the contributors list!</li>
+</ol>
+If you have access to Subversion, you can get direct access to the latest
+development snapshot by checking it out here:
+<pre>
+    cd /where/you/want/it
+    svn co http://perl-formbuilder.googlecode.com/svn/trunk/
+</pre>
+Currently, there is no remote commit access - simply use <code>svn diff</code>
+to send appropriate patches to the mailing list. If you use this method, please
+make sure to periodically use <code>svn up</code> to keep it from going stale.
+<p>
+Note: Please <b>DO NOT</b> use the "bug tracking" system that is linked off
+of cpan.org - it is impossible to navigate around in and find patches/follow-up.
+Good old-fashioned email is best. If you submit something via the rt.cpan.org
+bug tracker, it will likely be <b>IGNORED</b>.
+</p>
+<p class="label">Contributors</p>
+The list of contributors is growing continuously. The following people
+have contributed features and bug fixes that have really helped
+FormBuilder mature:
+<ul>
+    <li>Norton Allen</li>
+    <li>Mark Belanger</li>
+    <li>Peter Billam</li>
+    <li>Brad Bowman</li>
+    <li>Jonathan Buhacoff</li>
+    <li>Godfrey Carnegie</li>
+    <li>Jakob Curdes</li>
+    <li>Laurent Dami</li>
+    <li>Bob Egert</li>
+    <li>Peter Eichman</li>
+    <li>Adam Foxson</li>
+    <li>Jorge Gonzalez</li>
+    <li>Mark Hedges</li>
+    <li>Florian Helmberger</li>
+    <li>Mark Houliston</li>
+    <li>Robert James Kaes</li>
+    <li>Dimitry Kharitonov</li>
+    <li>Randy Kobes</li>
+    <li>William Large</li>
+    <li>Kevin Lubic</li>
+    <li>Robert Mathews</li>
+    <li>Mehryar</li>
+    <li>Koos Pol</li>
+    <li>Shawn Poulson</li>
+    <li>Dan Collis Puro</li>
+    <li>Stephan Springl</li>
+    <li>Ryan Tate</li>
+    <li>John Theus</li>
+    <li>Remi Turboult</li>
+    <li>Andy Wardley</li>
+    <li>(Your Name Here)</li>
+</ul>
+If you can't contribute code, but have still found FormBuilder useful
+for your job or hobby, consider donating to its development by clicking
+on the PayPal button in the upper right!
+<p class="label">Author</p>
+For more information, contact the author of the module,
+<a href="author.pl">Nate Wiger</a>.
+
+<!--#include virtual="/layout/footer.html"-->

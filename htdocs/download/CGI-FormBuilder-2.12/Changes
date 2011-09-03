@@ -1,0 +1,65 @@
+
+CHANGES SINCE 2.11
+    Many bugfixes were made, including:
+
+        - full XHTML compliance (thanks to Robert Kaes)
+        - a Template Toolkit issue with "field.invalid" (thanks to Stephan Springl)
+        - bad -x "sendmail -t" test and header problems (thanks to Adam Foxson)
+        - problem with $validate || $required leaving JS remnants (thanks to Ryan Tate)
+        - more sensible internal multiple => 1 handling
+        - addition of skip => /pat/ option to mail*
+        - problem w/ multiple-value validation being broken
+
+    The rest of this document is identical to the notes regarding 2.11
+
+
+IMPORTANT SECURITY FIX!
+
+    Thanks to much help from Robert Mathews and Remi Turboult, two
+    security holes have been plugged. These holes could allow a
+    malicious user to execute arbitrary code on the server if a
+    certain combination of options is used. *ALL* users are advised
+    to upgrade to this release immediately.
+
+
+NEW FEATURES
+
+Ability to specify a coderef to validate
+    You can now specify a reference to a subroutine in your validate
+    patterns, to completely handle validation:
+
+        validate => { field => \&my_sub }
+
+    The subroutine will receive the field's value as its first arg.
+    It will be called multiple times in the event of a multi-valued
+    field. The sub should return 1 if the value is valid, or undef
+    otherwise.
+
+Top-level <tmpl_loop fields> added for HTML::Template
+    A top-level template tag, simply called "fields", has been added
+    which allows you to loop through all the fields in a form:
+
+        <tmpl_loop fields>
+        <tr><td>
+            <tmpl_var label>: <tmpl_var field>
+        </td></tr>
+        </tmpl_loop>
+
+    This allows you to easily reuse HTML::Template templates. Thanks
+    to Dimitry Kharitonov for this patch.
+
+Addition of Text::Template support
+    YATE (Yet Another Template Engine) has been added to FormBuilder:
+    Text::Template, thanks to a big patch from Jonathan Buhacoff. See
+    the documentation for more details.
+
+
+BUG FIXES
+
+Literal Javascript was not being properly included in "jsfunc"
+    A couple edge-case oversights were fixed
+
+Many miscellaneous loose ends tied up
+    Many thanks to Brad Bowman for sending me a plethora of patches
+    fixing a bunch of annoyances.
+

@@ -1,0 +1,80 @@
+Multi-Screen Apps 3
+
+Now onto the other alternative:
+<ol>
+    <li value=2>Create a single <code>$form</code> object, and get to the
+        other params with <code>$form->cgi_param</code>
+</ol>
+This is useful if you are writing a component that needs to do a couple
+different things, such as add, edit, and delete all in one. For example,
+it is usually easier to write a single component that does these three
+things, even if you are using the multi-component methodology.
+<p>
+Here is an example that combines just the add, edit, and delete functions
+for an online calendar. The display, search, and other functions would
+be in separate components:
+
+<pre>
+#!/usr/bin/perl
+
+# editappt.pl - add, edit, or delete appointments in the calendar
+
+<b>use strict;       # recommended but not required</b>
+
+use CGI::FormBuilder;
+
+# create form at top
+my $form = CGI::FormBuilder->new(
+                fields => [qw/apptid apptname username location comments/],
+                <b>header => 1,            # always send header</b>
+                <b>keepextras => 1         # keep action param</b>
+           );
+
+<b>$form->field(name => 'apptid', static => 1);        # can't edit appt</b>
+
+<b>my $action = $form->cgi_param('action') || 'add';   # what to do</b>
+
+if ($action eq 'add') {
+    # Add new appt
+    if ($form->submitted && $form->validate) {
+        if ($form->submitted eq 'Cancel') {
+            # do nothing
+            print $form->confirm(text => "Nevermind, canceled request\n");
+        } else {
+            # create new appt
+        }
+    } else {
+        # Print add form
+        print $form->render(<b>submit => [qw/Add Cancel/]</b>);
+    }
+
+} elsif ($action eq 'edit') {
+    # Edit or delete appt
+    if ($form->submitted && $form->validate) {
+        if ($form->submitted eq 'Cancel') {
+            # do nothing
+            print $form->confirm(text => "Nevermind, canceled request\n");
+        } elsif ($form->submitted eq 'Delete') {
+            # delete appt
+        } else {
+            # update appt
+        }
+    } else {
+        # Editing, so should have specified an apptid
+        my $apptid = $form->field('apptid') || die "No apptid for edit";
+        
+        # Do a database select
+        my $apptref = $sth->selectrow_hashref("select * from db
+                                               where apptid = '$apptid'");
+
+        # Print edit form
+        print $form->render(<b>submit => [qw/Update Delete Cancel/]</b>,
+                            <b>values   => $apptref</b>);
+    }
+}
+</pre>
+
+As you can see, the same form is used for both screens. The only differences
+are (a) the edit screen is pre-filled with default <code>values</code> and
+(b) the add and edit screens have different buttons at the bottom. Notice how
+we exploited options to <code>render()</code> to make this happen.

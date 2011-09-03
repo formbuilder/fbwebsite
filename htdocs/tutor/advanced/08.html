@@ -1,0 +1,71 @@
+Multi-Screen Apps 2
+
+This section will examine the first alternative:
+<ol>
+    <li>Create a separate <code>CGI.pm $query</code> object, use
+        it to get your params, and then create your <code>$form</code>
+        objects with the <code>params</code> option.
+</ol>
+If you remember way back from the Basic tutorial, we already outlined
+pretty much how to do this in the "Custom Headers" section. Let's
+assume that the parameter is called <code>mode</code>. The only
+extra option we have to add is called <code>keepextras</code>, which
+will maintain non-field params as hidden fields across submissions.
+Otherwise, our <code>mode</code> will seem to magically "disappear"
+when we submit the form:
+
+<pre>
+#!/usr/bin/perl
+
+# article.pl - show, add, edit, delete online articles
+
+<b>use strict;       # recommended but not required</b>
+
+use CGI;
+use CGI::FormBuilder;
+
+<b>my $query = new CGI;                            # OO style</b>
+<b>my $mode  = $query->param('mode') || 'show';    # get the mode</b>
+
+if ($mode eq 'show') {
+    # Show existing article
+    my $article = $query->param('article_id');
+
+
+} elsif ($mode eq 'new') {
+    # New article
+    my $form = CGI::FormBuilder->new(
+                    fields => [qw/title author post_date summary
+                                  details city country/],
+
+                    <b>params => $query,           # params from CGI.pm</b> 
+                    <b>keepextras => 1             # keep mode param</b> 
+               );
+
+    if ($form->submitted && $form->validate) {
+        # post new article
+    } else {
+        print $form->render(template => '/templates/new_article.tmpl');
+    }
+
+} elsif ($mode eq 'edit') {
+    # Edit article ...
+
+
+} elsif ($mode eq 'delete') {
+    # Delete article ...
+
+
+}
+</pre>
+
+This code example could go for pages and pages. Basically, each <code>elsif</code>
+statement is its own component. The components are switched between with the
+special <code>mode</code> parameter.  Inside each component, a separate <code>$form</code>
+object is created to allow us to customize the fields and templates for each action.
+<p>
+You'll find this type of methodology most useful in applications like this one
+or in Apache <code>mod_perl</code> modules. In <code>mod_perl</code> modules, it's
+often easiest to have a different sub for each mode, and then the main <code>handler</code>
+sub simply redispatches. Each action sub would generate its own <code>$form</code>
+and output.

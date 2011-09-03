@@ -1,0 +1,38 @@
+Field Attributes
+
+Of course, in addition to options, there are a lot of "little things" one often
+has to do to a field, such as changing its length.
+<p>
+Well, just like changing the form attributes for our <code>&lt;form&gt;</code> tag,
+changing any tag you can think of for a field is done simply by specifying that
+tag to the <code>field()</code> method:
+
+<pre>
+$form->field(name  => 'first_name',
+             type  => 'text',       # default
+             <b>size  => 40,
+             maxlength => 80</b>);
+</pre>
+
+These changes would result in the following HTML tag:
+
+<pre>
+&lt;input name="first_name" type="text" size="40" maxlength="80"&gt;
+</pre>
+
+In fact, any extra attributes you specify that are not recognized FormBuilder
+options will be transferred directly into the HTML tag. This ensures that
+FormBuilder will not go out of date when HTML 12.4 comes out.
+<p>
+You can change a couple other things about a field as well:
+
+<pre>
+$form->field(name   => 'first_name',
+             <b>label  => 'Your First Name',   # override label
+             value  => 'anonymous',         # override value
+             comment=> '(first and last)'</b>); <b># printed after field</b>
+</pre>
+
+You can view the <a href="/docs/?jump=field()">complete documentation
+on the field() method</a>, which includes some options we'll look at
+a little later.

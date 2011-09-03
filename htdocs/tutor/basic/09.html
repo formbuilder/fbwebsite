@@ -1,0 +1,43 @@
+HTML Formatting
+
+You'll notice that the forms output thus far are very simple. White
+background, black font, generic text. This might've worked back in 1995,
+but it's a little boring these days.
+<p>
+FormBuilder provides you plenty of flexibility to make your forms as
+fancy as you want. In fact, there is a whole host of options you can
+use to change every part of the HTML formatting:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             fields => \@fields,
+             required => 'ALL',     # all fields must be filled in
+             <b>font   => 'arial,helvetica',
+             title  => 'Personal Information',
+             text   => 'Please input your personal info below:',
+             lalign => 'right',     # align field labels to right
+             table  => {            # change the &lt;table&gt;
+                bgcolor => 'gray', 
+                border  => 0,
+                cellspacing => 0,
+                cellpadding => 5,
+             },
+             body   => {            # change the &lt;body&gt;
+                bgcolor => '#3399CC',
+                text    => 'white',
+                link    => '#CC0000', 
+                vlink   => '#CC0000', 
+                alink   => '#CC0000', 
+             },
+        </b>);
+</pre>
+
+These are listed in order of decreasing usefulness. That is, in real
+life you will probably find yourself wanting to generate your own
+HTML header and footer, negating the need to change the body or
+even the title. However, the <code>font</code> option is quite
+useful, because FormBuilder will automatically generate font tags for
+every single table element. <i>(Even better, check out the <code>stylesheet</code> option)</i>
+<p>
+To get a taste of this formatting, <a href="/ex/personal_info.pl" onClick="miniwin(this)">see this in action</a>,
+and check out the <a href="/ex/source.pl?f=personal_info.pl" onClick="miniwin(this)">HTML generated</a>.

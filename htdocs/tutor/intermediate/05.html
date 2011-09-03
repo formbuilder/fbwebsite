@@ -1,0 +1,37 @@
+JavaScript Actions
+
+As you've already seen, FormBuilder actually generates tons of JavaScript for
+you, for the purpose of client-side form validation. JavaScript has other uses
+too, such as causing events to happen when a field is modified.
+<p>
+If you recall, back when we were talking about field attributes, we mentioned
+that any options not recognized by FormBuilder would be passed through to your
+HTML tag. So, one could set a JavaScript action like so:
+
+<pre>
+$form->field(name     => 'search',
+             <b>onchange => 'this.form.submit()'</b>);
+</pre>
+
+This will work just fine. But there's actually an even better way to do it.
+<p>
+Have you ever been annoyed at how the different input fields have different
+event handlers? Some are <code>onclick</code>, others are <code>onchange</code>,
+and so forth. This isn't the best for code maintenance, since this means you
+have to change your JavaScript actions if you update your options.
+<p>
+Instead, FormBuilder provides an option called <code>jsclick</code>. This is
+specified to <code>field()</code>, just like above, with the advantage that
+FormBuilder will automatically translate it to the correct action depending
+on the type of field:
+
+<pre>
+$form->field(name    => 'search',
+             <b>jsclick => 'this.form.submit()'</b>);
+</pre>
+
+This translates to less code maintenance in the long-run, plus it eliminates
+silly errors (such as using <code>onchange</code> for a <code>checkbox</code>).
+<p>
+It is also possible to specify special form actions, equivalent to <code>onsubmit</code>
+but more robust, which are covered just a little later.

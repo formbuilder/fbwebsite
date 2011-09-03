@@ -1,0 +1,52 @@
+CGI Stickiness
+
+"Stickiness" is the ability of values to remain filled in across
+submissions. Everyone's filled out a form that has an error, and
+which must be corrected. In such applications, if they're coded right,
+then the fields that have already been filled in remain filled in.
+<p>
+However, normally this is a big pain for anything other than simple
+text fields. Getting a select list to remain sticky is tedious at
+the very least, and multiple-select lists are error-prone because
+you have to calculate an intersection of the options and values.
+<p>
+As mentioned before, FormBuilder automatically handles stickiness
+for you, overriding any default <code>values</code> you may have
+specified, and returning the correct data to you. However, sometimes
+you may not want stickiness. For example, you may want to write an
+app that allows a person to add multiple entries to a database in
+rapid succession. In this case, simply turn stickiness off:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             fields => \@fields,
+             <b>sticky => 0          # not sticky</b>
+        );
+</pre>
+
+You will still be able to get to what the person entered via the
+<code>field()</code> function, but it won't appear in the form
+after being submitted.
+<p>
+On the other hand, you may decide it would be nice to pre-fill
+certain fields in a form from an HTML link. For example, if a
+person clicks on "Create new membership", you may want to fill
+in the name of the site. This is especially useful if you host
+several websites and want to use one form.
+<p>
+This is exceedingly easy in FormBuilder. Since FormBuilder 
+automatically handles stickiness, simply list any fields and
+values you want filled in via a URL request:
+
+<pre>
+http://your-server/subscribe.cgi?site=yoursite.com&bill=monthly
+</pre>
+
+Then, assuming that <code>subscribe.cgi</code> had a "site" and
+"bill" field in its form, they would be automatically filled in
+and/or selected with the specified data.
+
+
+
+
+

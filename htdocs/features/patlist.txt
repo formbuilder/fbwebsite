@@ -1,0 +1,27 @@
+    VALUE   -  is any type of non-null value
+    WORD    -  is a word (\w+)
+    NAME    -  matches [a-zA-Z] only
+    FNAME   -  person's first name, like "Jim" or "Joe-Bob"
+    LNAME   -  person's last name, like "Smith" or "King, Jr."
+    NUM     -  number, decimal or integer
+    INT     -  integer
+    FLOAT   -  floating-point number
+    PHONE   -  phone number in form "123-456-7890" or "(123) 456-7890"
+    INTPHONE-  international phone number in form "+prefix local-number"
+    EMAIL   -  email addr in form "name@host.domain"
+    CARD    -  credit card, including Amex, with or without -'s
+    DATE    -  date in format MM/DD/YYYY or DD/MM/YYYY
+    MMYY    -  date in format MM/YY or MMYY
+    MMYYYY  -  date in format MM/YYYY or MMYYYY
+    CCMM    -  strict checking for valid credit card 2-digit month ([0-9]|1[012])
+    CCYY    -  valid credit card 2-digit year
+    ZIPCODE -  US postal code in format 12345 or 12345-6789
+    STATE   -  valid two-letter state in all uppercase
+    IPV4    -  valid IPv4 address
+    NETMASK -  valid IPv4 netmask
+    FILE    -  UNIX format filename (/usr/bin)
+    WINFILE -  Windows format filename (C:\windows\system)
+    MACFILE -  MacOS format filename (folder:subfolder:subfolder)
+    HOST    -  valid hostname (some-name)
+    DOMAIN  -  valid domainname (www.i-love-bacon.com)
+    ETHER   -  valid ethernet address using either : or . as separators

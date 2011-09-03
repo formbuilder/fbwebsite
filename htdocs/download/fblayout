@@ -1,0 +1,17 @@
+#!/usr/bin/perl -s
+
+use lib '/home/httpd/vhosts/formbuilder.org/lib';
+use FBSite::Layout;
+
+# Split on first <HR> to get linked a href list
+($nav, @doc) = split m#<hr[ /]*>#, join '', <STDIN>;
+
+# Get title
+$tit = shift;
+
+# Fuck with nav, fuck .sh
+if ($selected) {
+    $tit =~ s#(<option\s+value="$selected")#$1 selected#;
+}
+
+print layout_noads(navbar($tit, $nav), @doc);

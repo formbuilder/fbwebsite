@@ -1,0 +1,32 @@
+<html>
+<!-- email_form2.tmpl -->
+<head>
+<title>foo.com</title>
+<link rel="stylesheet" href="formstyle.css">
+<tmpl_var js-head> <!-- JavaScript validation code -->
+<head>
+<body bgcolor="black" text="orange">
+<p>
+Hi! Welcome to foo.com! Please tell us some basic info:
+<p>
+<tmpl_var form-start>
+<tmpl_var label-name>  <input class="textStyle" name="name" type="text" 
+                              value="<tmpl_var value-name>"><br>
+<tmpl_var label-email> <input class="textStyle" name="email" type="text"
+                              value="<tmpl_var value-email>"><br>
+<p>
+Join Mailing List? 
+<!-- loop through mlist options -->
+<select name="mlist" class="selectStyle">
+<tmpl_loop loop-mlist>
+    <option value="<tmpl_var value>" <tmpl_var selected>>
+        <tmpl_var label>
+    </option>
+</tmpl_loop>
+</select>
+<p>
+When you're done, hit the "Submit" button below:<br>
+<tmpl_var form-reset> <tmpl_var form-submit> <!-- buttons -->
+<tmpl_var form-end>
+</body>
+</html>

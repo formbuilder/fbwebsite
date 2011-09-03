@@ -1,0 +1,38 @@
+<!--#include virtual="/layout/header.html"-->
+
+<p class="label">Custom Message Types</p>
+FormBuilder supports the following message types, which are
+set using the <code>messages</code> option:
+<blockquote>
+
+<!--#include virtual="./mesglist.pl"-->
+
+</blockquote>
+Any instance of "%s" is filled in with the appropriate value.
+To override any of the defaults, simply specify the appropriate
+message type to the messages option:
+<blockquote>
+<table cellpadding=5 border=1><tr><td bgcolor="#FFFFCC" width=500>
+<font face="courier new,courier">
+<pre>
+$form = CGI::FormBuilder->new(
+             fields => \@fields,<b>
+             messages => {
+                form_select_default    => '--',
+                form_invalid_password  => 'Make sure your password uses numbers and letters',
+             }</b>
+        );
+</pre>
+</tr></td></table>
+</blockquote>
+
+Alternatively, you can specify a filename to the <code>messages</code>
+option, which allows you to defined a common set of messages and
+reuse them in all your scripts. For more information, see
+<a href="/tutor/index.pl?c=3&s=10">this tutorial</a>.
+<p>
+You can use any string you want for the message, including 
+text in other languages. This allows you to fully customize
+the interface for your native language.
+
+<!--#include virtual="/layout/footer.html"-->

@@ -1,0 +1,42 @@
+Input Validation
+
+If you played with the <a href="/ex/simple_form.pl" onClick="miniwin(this)">simple form</a> a
+little, you noticed that it let you enter anything for any of the fields.
+Obviously what we really want is to be able to make sure that our input
+is indeed valid; that the person entered a real email address, actual
+phone number, and so forth.
+<p>
+This is where FormBuilder's validation routines come in. FormBuilder will
+actually generate both JavaScript <i>and</i> Perl regex functions on the
+fly, which will automatically check your data.
+<p>
+Using validation is simple - all you have to do is specify the <code>validate</code>
+option to <code>new()</code>. So, modifying our simple form we add:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             fields => \@fields,<b>
+             validate => {
+                first_name => 'NAME',
+                last_name  => 'NAME',
+                email      => 'EMAIL',
+                phone      => 'PHONE',
+             }</b>
+        );
+</pre>
+
+Our new validate block (actually a hashref) tells FormBuilder to use its
+built-in <code>NAME</code>, <code>EMAIL</code>, and <code>PHONE</code>
+regular expressions to validate the form. Here is a 
+<a href="/features/patterns.shtml">full list of built-in patterns</a>.
+In addition, you can specify your own regexps, which we'll look at later.
+<p>
+Pause to <a href="/ex/input_validation.pl" onClick="miniwin(this)">see this in action</a>, as well as
+<a href="/ex/source.pl?f=input_validation.pl" onClick="miniwin(this)">view the HTML generated</a>, before
+continuing.
+<p>
+As you can see, FormBuilder does a <i>lot</i> of work for you. In just
+25 lines, we already have a form application complete with validation.
+Plus, adding a new field is as simple as adding another element to
+our <code>@fields</code> array. FormBuilder will automatically re-layout
+the form and properly handle the data.

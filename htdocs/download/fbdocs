@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# nwiger, 08/22/2006: document generator for FB website
+# need bash for $()
+
+BASE=$(cd $(dirname $0) && pwd)
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 version" >&2
+    exit 2
+fi
+
+PKG='CGI-FormBuilder-'
+VER=$1
+DIR="$BASE/$PKG$VER"
+URL="/download/$PKG$VER/docs"
+if [ ! -d $DIR ]; then
+    echo "Cannot access $DIR"
+    exit 3
+fi
+
+LIB="$DIR/lib"
+POD='.pm'
+if [ ! -d $LIB ]; then
+    LIB=$DIR     # flat in 2.x
+    LINK=yup
+    if [ "$VER" = '2.06' ] || [ "$VER" = '2.07' ]; then
+        POD='.pm'
+    else
+        POD='.pod'
+    fi
+fi
+
+DOC="$DIR/docs"
+[ -d $DOC ] || mkdir $DOC || exit $?
+
+allpods=`find $LIB -name "*$POD" -o -name 'FormBuilder.pod' | grep -v Messages/ | grep -v Field/ | sort`
+
+TOPBAR=$(
+    echo '<font size=2>'
+    echo '<form action="/redirect.pl" method="GET">'
+    echo '<select name="url" onChange="this.form.submit()">'
+    for u in $allpods
+    do
+        u=`echo $u | sed -e "s#.*$LIB/##" -e "s/\.p[odm]*$//"`
+        # this roundabout method is needed because of FB.html filename
+        ut=CGI::`echo $u | sed -e 's#/#::#g' -e 's#^CGI::##'`
+        echo "<option value=\"$URL/$u.html\">$ut</option>"
+    done
+    echo "<option value="/docs/">Version other than $VER</option>"
+    echo '</select></form></font>'
+)
+#echo "TOPBAR='$TOPBAR'"
+
+echo "Creating HTML docs for FormBuilder v$VER"
+for f in $allpods
+do
+    o=`echo $f | sed -e "s#.*$LIB/##" -e "s/\.p[odm]*$//"`.html
+    # this roundabout method is needed because of FB.html filename
+    t=CGI::`echo $f | sed -e "s#.*$LIB/[CGI/]*##" -e 's#/#::#g' -e "s/$POD$//"`
+    echo "Generating $o"
+    d="$DOC/`dirname $o`"
+    [ -d $d ] || mkdir -p $d || exit $?
+
+    pod2html --htmlroot=$URL $f | perl -e '
+        $_ = join "", <STDIN>;  # scalar
+        s/([^-])->/$1-&gt;/g;
+        s/=>/=&gt;/g;
+        s!</body>!!i;
+        s!</html>!!i;
+        s!</pre>\s+<pre>!\n!gmsi;    # squish multiple blocks
+        s!<LI>(<A\s+HREF=.*>.+\()[^<]+(.*)!<LI>$1)$2$3!g;
+        print "\n<style>ul { margin-left: 0; padding-left: 10px; }</style>\n";
+        print;
+     ' \
+        | fblayout -selected="$URL/$o" "$TOPBAR" >$DOC/$o
+done
+
+if [ $LINK ]; then
+    [ -e $DOC/CGI ] || ln -s . $DOC/CGI
+fi
+rm -f $BASE/pod2htm*
+

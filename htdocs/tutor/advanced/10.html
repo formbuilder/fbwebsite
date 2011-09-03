@@ -1,0 +1,72 @@
+Custom Messages
+
+The last topic we'll cover is custom messaging. Most of the time,
+the built-in FormBuilder messages are sufficient. However, you may be
+writing a multi-lingual application, or something else that requires precise
+control over messages.
+<p>
+FormBuilder's messaging system is very easy to understand. Each message
+is given a unique tag by FormBuilder. For example, the message that is
+used in a JavaScript alert about an invalid select list is called
+<code>js_invalid_select</code>. 
+<p>
+Each message you want to customize is specified to the <code>messages</code>
+parameter to <code>new()</code>, along with what you want the message
+to say:
+
+<pre>
+#!/usr/bin/perl
+
+use CGI::FormBuilder;
+
+$form = CGI::FormBuilder->new(
+             fields => [qw/name email phone/],
+             <b>messages => {
+                js_invalid_start  => 'There were %s errors found:',
+                js_invalid_text   => '- The "%s" field was invalid',
+                js_invalid_end    => 'For more help, click the "Help" button',
+                form_invalid_text => 'This field is missing or invalid',
+             }</b>
+        );
+
+print $form->render(header => 1);
+</pre>
+
+Alternatively, you can put these specifications in a separate file,
+one per line, separated by a space between them:
+
+<pre>
+#
+# messages.en - messages for English
+#
+js_invalid_start    There were %s errors found:
+js_invalid_text     - The "%s" field was invalid
+js_invalid_end      For more help, click the "Help" button
+form_invalid_text   This field is missing or invalid
+</pre>
+
+(Note: You do not use quotes or commas in this file.)
+
+Then, you simply specify the filename to your form:
+
+<pre>
+#!/usr/bin/perl
+
+use CGI::FormBuilder;
+
+<b>$lang = $ENV{HTTP_ACCEPT_LANGUAGE} || 'en';      # language</b>
+
+$form = CGI::FormBuilder->new(
+             fields => [qw/name email phone/],
+             <b>messages => "messages.$lang",       # messages file</b>  
+        );
+
+print $form->render(header => 1);
+</pre>
+
+FormBuilder will issue a warning if it can't open the specified
+filename, and then will continue using the default messages. Any
+messages not explicitly specified will remain the same as the defaults.
+<p>
+If you're interested in custom messages, please <a href=/features/messages.shtml>view
+the complete list of custom message tags</a>.

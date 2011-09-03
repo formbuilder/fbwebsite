@@ -1,0 +1,4 @@
+<!--#include virtual="/layout/header.html"-->
+<p class="label">400 Malformed Request</p>
+Your browser screwed up. Hit "Back" to try again.
+<!--#include virtual="/layout/footer.html"-->

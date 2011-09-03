@@ -1,0 +1,3 @@
+    my $ckstr = rot13($str);
+    my $vlink = ''; #qq(<img src="$cf{cverimage}?$ckstr" height="18" alt="Verification" align="middle" />);
+

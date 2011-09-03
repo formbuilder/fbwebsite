@@ -1,0 +1,62 @@
+Modules & mod_perl
+
+FormBuilder is designed to work well alone, alongside other modules, or
+even in a <code>mod_perl</code> environment. FormBuilder is written under
+<code>use strict</code> and is completely <code>mod_perl</code> safe.
+<p>
+The key to interacting with any of these situations is the <code>params</code>
+option to <code>new()</code>. We discussed this before, in the section on
+"Custom Headers". By default, FormBuilder assumes it has complete control
+of the CGI environment, and will create its own instance of <code>CGI.pm</code>
+to manage it.
+<p>
+However, when you're already using <code>CGI.pm</code> yourself, or running
+under <code>mod_perl</code>, this is obviously not true. So, in either of
+these situations you need to specify the <code>params</code> option to <code>new()</code>.
+<p>
+First, using FormBuilder with <code>CGI.pm</code>:
+
+<pre>
+#!/usr/bin/perl
+
+use CGI;
+use CGI::FormBuilder;
+
+<b>$query = new CGI;</b>
+$form  = CGI::FormBuilder->new(
+             method => 'post',
+             fields => [qw/name email zipcode/],
+             <b>params => $query</b>
+         );
+
+print $form->render;
+</pre>
+
+Second, using FormBuilder under <code>mod_perl</code>
+
+<pre>
+package My::Application;    # or whatever
+
+use Apache::Request;
+use CGI::FormBuilder;
+
+sub handler {
+    <b>my $r = Apache::Request->new(shift);</b>
+    my $form = CGI::FormBuilder->new(
+                    method => 'post',
+                    fields => [qw/name email zipcode/],
+                    <b>params => $r</b>
+               );
+    print $form->render;
+}
+</pre>
+
+In both situations, the only thing that you have to add is the <code>params</code>
+option. Everything else about FormBuilder stays the same.
+<p>
+Finally, note that the <code>params</code> and <code>values</code> options are
+separate, and <i>both</i> can be specified. The <code>values</code> option is
+designed to provide default values to populate the form with. The <code>params</code>
+option changes where to get CGI parameters from. CGI parameters will always
+override any default values.
+

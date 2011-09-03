@@ -1,0 +1,72 @@
+Intro to Templates
+
+The basic idea behind any templating system is to keep the HTML
+layout separate from the CGI application. The HTML is placed in
+a template, which is then expanded by the templating module.
+<p>
+FormBuilder provides native support for the following engines:
+<ul>
+    <li><a href="http://search.cpan.org/~samtregar/HTML-Template-2.7/" target="_blank">HTML::Template</a></li>
+    <li><a href="http://search.cpan.org/~jmoore/CGI-FastTemplate-1.09/" target="_blank">CGI::FastTemplate</a></li>
+    <li><a href="http://search.cpan.org/~mjd/Text-Template-1.44/" target="_blank">Text::Template</a></li>
+    <li><a href="http://search.cpan.org/~abw/Template-Toolkit-2.14/" target="_blank">Template Toolkit</a></li>
+</ul>
+If you're already familiar with any of these, you'll find FormBuilder
+can plug right into your existing templates.
+<p>
+Fully exploiting templates is probably deserving of its own tutorial.
+So, this will just give you a taste of what you can do. From there you
+should refer to the appropriate documentation on the template
+system of your choice.
+<p>
+Like anything else, enabling templates only requires one additional
+option to FormBuilder:
+<pre>
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => \@fields,
+             <b>template => '/path/to/file.tmpl'</b>
+        );
+</pre>
+The above will enable <code>HTML::Template</code> style templates.
+If you want to make use of <code>Template Toolkit</code>, you must
+use a hashref so you can specify the type:
+<pre>
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => \@fields,
+             <b>template => {
+                 type => 'TT2',     # Template Toolkit
+                 template => '/path/to/file.tmpl',
+             }</b>
+        );
+</pre>
+In fact, <code>Template Toolkit</code> accepts many other options, any of which
+can be specified within the <code>template</code> block above. Consult the
+<code>Template Toolkit</code> documentation for a list of options.
+<p>
+You can do the same thing with <code>HTML::Template</code>, just specify
+the type as <code>HTML</code>:
+<pre>
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => \@fields,
+             <b>template => {
+                 type => 'HTML',   # HTML::Template
+                 filename => '/path/to/file.tmpl',
+                 shared_cache => 1
+             }</b>
+        );
+</pre>
+Basically, if you specify a hashref to the <code>template</code> option, this
+hashref is passed <i>directly</i> to the template module, so it can accept any
+and all options the template module can natively.
+<p>
+In all cases, <i>you don't change anything else!</i> You address your form fields
+just like you would without a template. Your template is automatically
+expanded by FormBuilder when you say:
+<pre>
+print $form->render;
+</pre>
+Not to brag, but how cool is that!
+

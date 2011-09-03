@@ -1,0 +1,37 @@
+#!/usr/bin/perl
+
+use File::Basename;
+use strict;
+
+my $cpanurl = 'http://www.cpan.org/authors/id/N/NW/NWIGER';
+my $basepkg = 'CGI-FormBuilder-';
+my $relnote = 'relnotes.pl';
+my $dirname = dirname($0);
+my $htmldoc = "$dirname/fbdocs";
+
+my $ver = shift || die "Usage: $0 version\n";
+
+chomp(my $dir = `dirname $0`);
+chdir($dir) || die $!;
+
+my $filename = "$basepkg$ver.tar.gz";
+
+if (-f $filename) {
+    print "Warning: $filename exists. Overwrite (y/n)? ";
+    die "Aborting.\n" unless <STDIN> =~ /^y/i;
+}
+
+system("GET $cpanurl/$filename >$filename") && die "GET failed: $?";
+
+print "$filename created.\n";
+
+system("gunzip -c $filename | tar xf -") && die "tar failed: $?";
+
+print "and unpacked $basepkg$ver for browsing.\n";
+
+# create docs
+system "$htmldoc $ver";
+
+print "and generated documentation.\n";
+
+

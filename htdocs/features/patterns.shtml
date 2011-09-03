@@ -1,0 +1,36 @@
+<!--#include virtual="/layout/header.html"-->
+
+<p class="label">Built-In Validation Patterns</p>
+FormBuilder has a huge number of built-in regular expressions you
+can use with the <code>validate</code> option:
+<blockquote>
+
+<!--#include virtual="patlist.html"-->
+
+</blockquote>
+To make use of any of these, just specify them along with the
+corresponding field name in the <code>validate</code> option
+to <code>new()</code>:
+<blockquote>
+<table cellpadding=5 border=1><tr><td bgcolor="#FFFFCC" width=500>
+<font face="courier new,courier">
+<pre>
+$form = CGI::FormBuilder->new(
+             fields => \@fields,<b>
+             validate => {
+                first_name  => 'FNAME',
+                last_name   => 'LNAME',
+                email       => 'EMAIL',
+                phone       => 'PHONE',
+                card_type   => 'NAME',
+                card_number => 'CARD',
+                exp_date    => 'MMYY',
+             }</b>
+        );
+</pre>
+</tr></td></table>
+</blockquote>
+
+<p>
+
+<!--#include virtual="/layout/footer.html"-->

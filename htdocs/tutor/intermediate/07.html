@@ -1,0 +1,56 @@
+Multiple Submits
+
+Multiple "Submit" buttons are a handy feature that can really simplify an
+interface. For example, you may be writing a form that allows people to
+add and remove records from a database. Rather than write multiple apps,
+it is often easier for everyone if a single screen shows the item, along
+with "Update", "Delete", and "Cancel" buttons along the bottom.
+<p>
+The problem is, how do you tell which one the user clicked? Unfortunately
+this is problematic, because browsers suck.
+<p>
+FormBuilder works around this problem with some JavaScript magic<sup><small>TM</small></sup>.
+This allows you to reliably tell which button the person clicked on. Getting
+to this information is easy - it's returned from the same <code>submitted()</code>
+function we saw early on.
+<p>
+To create a form with multiple submit buttons, all you have to do is specify
+an arrayref to the <code>submit</code> option. You may also want to turn
+off the <code>reset</code> button to prevent confusion:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => \@fields,
+             <b>submit => [qw/Update Delete Cancel/],
+             reset  => 0,         # turn off reset button</b>
+        );
+</pre>
+
+Getting to the submission mode is easy, just use <code>submitted()</code>:
+
+<pre>
+<b>if ($form->submitted eq 'Update' && $form->validate) {
+    # code to update record
+ 
+} elsif ($form->submitted eq 'Delete') {
+    # code to delete record
+
+} elsif ($form->submitted eq 'Cancel') {
+    # do nothing
+</b>
+} else {
+    print $form->render(header => 1);
+}
+</pre>
+
+There you have a single-screen application that handles the whole process.
+Note that we only use <code>validate()</code> against the "Update" submit
+mode, for reasons explained below.
+<p>
+If you were to write an application like this and were using input validation, you
+would notice one annoying thing. Since FormBuilder has no idea what your different
+submit buttons are supposed to do, it will generate JavaScript that will try to validate
+your form fields on every submission. However, you really don't want to have to enter
+valid data just to "Cancel" and do nothing. Keep reading...
+

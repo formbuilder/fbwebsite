@@ -1,0 +1,37 @@
+Smartness
+
+As we've seen repeatedly, FormBuilder does a lot of stuff for you automatically.
+In the majority of cases, this is good, but there may be occassion where
+you want FormBuilder to be a little "stupider" and just generate and process
+basic HTML and JavaScript.
+<p>
+This is easy to do, simply tweak the <code>smartness</code> option:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             fields => \@fields,
+             <b>smartness => 0      # dare to be stupid</b>
+        );
+</pre>
+
+Conversely, there's a whole bunch of stuff that FormBuilder can do but doesn't
+by default. For example, FormBuilder can automatically guess at the type of field
+something should be, just based on its name. For example, a field including the
+regex <code>passw[or]*d</code> would become type <code>password</code>, a field including
+the term "comments" could become type <code>textarea</code>, and so on.
+<p>
+If you want stuff like this, including automatic field validation and options,
+turn up the smartness:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             fields => \@fields,
+             <b>smartness => 2      # genius level IQ</b>
+        );
+</pre>
+
+To see how much stuff this does for you, take a look at this <a href="/ex/form_method_smart.pl"
+onClick="miniwin(this)">smart version of the form method script</a> that we saw way
+back in the Basic Tutorial. Make sure to check out the <a href="/ex/source.pl?f=form_method_smart.pl"
+onClick="miniwin(this)">HTML source</a> for comparison. (The original script is
+<a href="/ex/form_method_smart.pl" onClick="miniwin(this)">here</a>)

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>FormBuilder - Perl CGI Form Builder CPAN module</title>
+<link type="text/css" rel="stylesheet" href="/layout/style.css" />
+<script src="/js/miniwin.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- top navbar -->
+<table width="100%" border="0" cellspacing="0" class="bar"><tr>
+<td width="228"><a href="/"><img src="/images/fb_logo5.gif" width="228" height="42" 
+ border="0" alt="Perl Form Builder" /></a></td>
+<td class="bar">
+   ::<a href="/features/" class="bar">Features</a>
+   ::<a href="/download/" class="bar">Download</a>
+   ::<a href="/tutor/" class="bar">Tutorial</a>
+   ::<a href="/ex/" class="bar">Examples</a>
+   <br />
+   ::<a href="/docs/" class="bar">Documentation</a>
+   ::<a href="/mailman/listinfo/fbusers" class="bar">Join the Mailing List</a>
+   ::<a href="http://blog.gmane.org/gmane.comp.lang.perl.modules.formbuilder" class="bar">List Archives</a>
+   ::<a href="/contrib/" class="bar">Contribute</a>
+</td>
+<td class="bar" align="center" valign="middle">
+<!-- BEGIN PAYPAL CODE -->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick" />
+<input type="hidden" name="business" value="nate@wiger.org" />
+<input type="hidden" name="item_name" value="FormBuilder development support" />
+<input type="image" src="http://www.paypal.com/images/x-click-but04.gif" 
+name="submit" alt="Donate using PayPal" />
+</form>
+</td>
+</tr>
+</table>
+<!-- spacer -->
+<div id="navspacer"><img src="/images/clear.gif" width="1" height="1"></div>
+<table class="body" border="0" cellpadding="5" cellspacing="0">
+<tr><td valign="top" class="body">
+<!-- opens the left navbar -->
+<table border="0" cellpadding="5" cellspacing="0" class="leftnav">
+<tr>
+<td valign="top" class="leftnav">
+<font size=2>
+<form action="/redirect.pl" method="GET">
+<select name="url" onChange="this.form.submit()">
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder.html">CGI::FormBuilder</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder.html">CGI::FormBuilder</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Field.html">CGI::FormBuilder::Field</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Messages.html">CGI::FormBuilder::Messages</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Multi.html">CGI::FormBuilder::Multi</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Source.html">CGI::FormBuilder::Source</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Source/File.html">CGI::FormBuilder::Source::File</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Template.html">CGI::FormBuilder::Template</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Template/Builtin.html">CGI::FormBuilder::Template::Builtin</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Template/Div.html">CGI::FormBuilder::Template::Div</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Template/Fast.html">CGI::FormBuilder::Template::Fast</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Template/HTML.html" selected>CGI::FormBuilder::Template::HTML</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Template/TT2.html">CGI::FormBuilder::Template::TT2</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Template/Text.html">CGI::FormBuilder::Template::Text</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Test.html">CGI::FormBuilder::Test</option>
+<option value="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Util.html">CGI::FormBuilder::Util</option>
+<option value=/docs/>Version other than 3.05</option>
+</select></form></font>
+<style>ul { margin-left: 0; padding-left: 10px; }</style>
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CGI::FormBuilder::Template::HTML - FormBuilder interface to HTML::Template</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<ul>
+
+		<li><a href="#engine">engine</a></li>
+		<li><a href="#prepare">prepare</a></li>
+		<li><a href="#render">render</a></li>
+	</ul>
+
+	<li><a href="#templates">TEMPLATES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#revision">REVISION</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<!-- closes the left navbar -->
+</td></tr></table></td><td valign="top" class="body">
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>CGI::FormBuilder::Template::HTML - FormBuilder interface to HTML::Template</p>
+<p>
+</p>
+
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+    my $form = CGI::FormBuilder-&gt;new(
+                    fields   =&gt; \@fields,
+                    template =&gt; 'form.tmpl',
+               );</pre>
+<p>
+</p>
+
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>This engine adapts <strong>FormBuilder</strong> to use <code>HTML::Template</code>.
+<code>HTML::Template</code> is the default template option and is activated
+one of two ways. Either:</p>
+<pre>
+    my $form = CGI::FormBuilder-&gt;new(
+                    fields =&gt; \@fields,
+                    template =&gt; 'form.tmpl',
+               );</pre>
+<p>Or, you can specify any options which <code>HTML::Template-&gt;new</code>
+accepts by using a hashref:</p>
+<pre>
+    my $form = CGI::FormBuilder-&gt;new(
+                    fields =&gt; \@fields,
+                    template =&gt; {
+                        type =&gt; 'HTML',
+                        filename =&gt; 'form.tmpl',
+                        shared_cache =&gt; 1,
+                        loop_context_vars =&gt; 1
+                    }
+                );</pre>
+<p>The following methods are provided (usually only used internally):</p>
+<p>
+</p>
+<h2><a name="engine">engine</a></h2>
+<p>Returns a reference to the <code>HTML::Template</code> object</p>
+<p>
+</p>
+<h2><a name="prepare">prepare</a></h2>
+<p>Returns a hash of all the fields ready to be rendered.</p>
+<p>
+</p>
+<h2><a name="render">render</a></h2>
+<p>Uses the prepared hash and expands the template, returning a string of HTML.</p>
+<p>
+</p>
+
+<h1><a name="templates">TEMPLATES</a></h1>
+<p>In your template, each of the form fields will correspond directly to
+a <code>&lt;tmpl_var&gt;</code> of the same name prefixed with ``field-'' in the
+template. So, if you defined a field called ``email'', then you would
+setup a variable called <code>&lt;tmpl_var field-email&gt;</code> in your template.</p>
+<p>In addition, there are a couple special fields:</p>
+<pre>
+    &lt;tmpl_var js-head&gt;     -  JavaScript to stick in &lt;head&gt;
+    &lt;tmpl_var form-title&gt;  -  The &lt;title&gt; of the HTML form
+    &lt;tmpl_var form-start&gt;  -  Opening &lt;form&gt; tag and internal fields
+    &lt;tmpl_var form-submit&gt; -  The submit button(s)
+    &lt;tmpl_var form-reset&gt;  -  The reset button
+    &lt;tmpl_var form-end&gt;    -  Just the closing &lt;/form&gt; tag</pre>
+<p>Let's look at an example <code>form.tmpl</code> template we could use:</p>
+<pre>
+    &lt;html&gt;
+    &lt;head&gt;
+    &lt;title&gt;User Information&lt;/title&gt;
+    &lt;tmpl_var js-head&gt;&lt;!-- this holds the JavaScript code --&gt;
+    &lt;/head&gt;
+    &lt;tmpl_var form-start&gt;&lt;!-- this holds the initial form tag --&gt;
+    &lt;h3&gt;User Information&lt;/h3&gt;
+    Please fill out the following information:
+    &lt;!-- each of these tmpl_var's corresponds to a field --&gt;
+    &lt;p&gt;Your full name: &lt;tmpl_var field-name&gt;
+    &lt;p&gt;Your email address: &lt;tmpl_var field-email&gt;
+    &lt;p&gt;Choose a password: &lt;tmpl_var field-password&gt;
+    &lt;p&gt;Please confirm it: &lt;tmpl_var field-confirm_password&gt;
+    &lt;p&gt;Your home zipcode: &lt;tmpl_var field-zipcode&gt;
+    &lt;p&gt;
+    &lt;tmpl_var form-submit&gt;&lt;!-- this holds the form submit button --&gt;
+    &lt;/form&gt;&lt;!-- can also use &quot;tmpl_var form-end&quot;, same thing --&gt;</pre>
+<p>As you see, you get a <code>&lt;tmpl_var&gt;</code> for each for field you define.</p>
+<p>However, you may want even more control. That is, maybe you want
+to specify every nitty-gritty detail of your input fields, and
+just want this module to take care of the statefulness of the
+values. This is no problem, since this module also provides
+several other <code>&lt;tmpl_var&gt;</code> tags as well:</p>
+<pre>
+    &lt;tmpl_var value-[field]&gt;   - The value of a given field
+    &lt;tmpl_var label-[field]&gt;   - The human-readable label
+    &lt;tmpl_var comment-[field]&gt; - Any optional comment
+    &lt;tmpl_var error-[field]&gt;   - Error text if validation fails
+    &lt;tmpl_var required-[field]&gt; - See if the field is required</pre>
+<p>This means you could say something like this in your template:</p>
+<pre>
+    &lt;tmpl_var label-email&gt;:
+    &lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;&lt;tmpl_var value-email&gt;&quot;&gt;
+    &lt;font size=&quot;-1&quot;&gt;&lt;i&gt;&lt;tmpl_var error-email&gt;&lt;/i&gt;&lt;/font&gt;</pre>
+<p>And <strong>FormBuilder</strong> would take care of the value stickiness for you,
+while you have control over the specifics of the <code>&lt;input&gt;</code> tag.
+A sample expansion may create HTML like the following:</p>
+<pre>
+    Email:
+    &lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;nate@wiger.org&quot;&gt;
+    &lt;font size=&quot;-1&quot;&gt;&lt;i&gt;You must enter a valid value&lt;/i&gt;&lt;/font&gt;</pre>
+<p>Note, though, that this will only get the <em>first</em> value in the case
+of a multi-value parameter (for example, a multi-select list). To
+remedy this, if there are multiple values you will also get a
+<code>&lt;tmpl_var&gt;</code> prefixed with ``loop-''. So, if you had:</p>
+<pre>
+    myapp.cgi?color=gray&amp;color=red&amp;color=blue</pre>
+<p>This would give the <code>color</code> field three values. To create a select
+list, you would do this in your template:</p>
+<pre>
+    &lt;select name=&quot;color&quot; multiple&gt;
+    &lt;tmpl_loop loop-color&gt;
+        &lt;option value=&quot;&lt;tmpl_var value&gt;&quot;&gt;&lt;tmpl_var label&gt;&lt;/option&gt;
+    &lt;/tmpl_loop&gt;
+    &lt;/select&gt;</pre>
+<p>With <code>&lt;tmpl_loop&gt;</code> tags, each iteration gives you several
+variables:</p>
+<pre>
+    Inside &lt;tmpl_loop&gt;, this...  Gives you this
+    ---------------------------  -------------------------------
+    &lt;tmpl_var value&gt;             value of that option
+    &lt;tmpl_var label&gt;             label for that option
+    &lt;tmpl_var checked&gt;           if selected, the word &quot;checked&quot;
+    &lt;tmpl_var selected&gt;          if selected, the word &quot;selected&quot;</pre>
+<p>Please note that <code>&lt;tmpl_var value&gt;</code> gives you one of the <em>options</em>,
+not the values. Why? Well, if you think about it you'll realize that
+select lists and radio groups are fundamentally different from input
+boxes in a number of ways. Whereas in input tags you can just have
+an empty value, with lists you need to iterate through each option
+and then decide if it's selected or not.</p>
+<p>When you need precise control in a template this is all exposed to you;
+normally <strong>FormBuilder</strong> does all this magic for you. If you don't need
+exact control over your lists, simply use the <code>&lt;tmpl_var field-[name]&gt;</code>
+tag and this will all be done automatically, which I strongly recommend.</p>
+<p>But, let's assume you need exact control over your lists. Here's an
+example select list template:</p>
+<pre>
+    &lt;select name=&quot;color&quot; multiple&gt;
+    &lt;tmpl_loop loop-color&gt;
+    &lt;option value=&quot;&lt;tmpl_var value&gt;&quot; &lt;tmpl_var selected&gt;&gt;&lt;tmpl_var label&gt;
+    &lt;/tmpl_loop&gt;
+    &lt;/select&gt;</pre>
+<p>Then, your Perl code would fiddle the field as follows:</p>
+<pre>
+    $form-&gt;field( 
+              name =&gt; 'color', nameopts =&gt; 1,
+              options =&gt; [qw(red green blue yellow black white gray)]
+           );</pre>
+<p>Assuming query string as shown above, the template would then be expanded
+to something like this:</p>
+<pre>
+    &lt;select name=&quot;color&quot; multiple&gt;
+    &lt;option value=&quot;red&quot; selected&gt;Red
+    &lt;option value=&quot;green&quot; &gt;Green
+    &lt;option value=&quot;blue&quot; selected&gt;Blue
+    &lt;option value=&quot;yellow&quot; &gt;Yellow
+    &lt;option value=&quot;black&quot; &gt;Black
+    &lt;option value=&quot;white&quot; &gt;White
+    &lt;option value=&quot;gray&quot; selected&gt;Gray
+    &lt;/select&gt;</pre>
+<p>Notice that the <code>&lt;tmpl_var selected&gt;</code> tag is expanded to the word
+``selected'' when a given option is present as a value as well (i.e.,
+via the CGI query). The <code>&lt;tmpl_var value&gt;</code> tag expands to each option
+in turn, and <code>&lt;tmpl_var label&gt;</code> is expanded to the label for that
+value. In this case, since <code>nameopts</code> was specified to <code>field()</code>, the
+labels are automatically generated from the options.</p>
+<p>Let's look at one last example. Here we want a radio group that allows
+a person to remove themself from a mailing list. Here's our template:</p>
+<pre>
+    Do you want to be on our mailing list?
+    &lt;p&gt;&lt;table&gt;
+    &lt;tmpl_loop loop-mailopt&gt;
+    &lt;td bgcolor=&quot;silver&quot;&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;mailopt&quot; value=&quot;&lt;tmpl_var value&gt;&quot;&gt;
+    &lt;/td&gt;
+    &lt;td bgcolor=&quot;white&quot;&gt;&lt;tmpl_var label&gt;&lt;/td&gt;
+    &lt;/tmpl_loop&gt;
+    &lt;/table&gt;</pre>
+<p>Then, we would twiddle our <code>mailopt</code> field via <code>field()</code>:</p>
+<pre>
+    $form-&gt;field(
+              name =&gt; 'mailopt',
+              options =&gt; [
+                 [ 1 =&gt; 'Yes, please keep me on it!' ],
+                 [ 0 =&gt; 'No, remove me immediately.' ]
+              ]
+           );</pre>
+<p>When the template is rendered, the result would be something like this:</p>
+<pre>
+    Do you want to be on our mailing list?
+    &lt;p&gt;&lt;table&gt;
+
+    &lt;td bgcolor=&quot;silver&quot;&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;mailopt&quot; value=&quot;1&quot;&gt;
+    &lt;/td&gt;
+    &lt;td bgcolor=&quot;white&quot;&gt;Yes, please keep me on it!&lt;/td&gt;
+
+    &lt;td bgcolor=&quot;silver&quot;&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;mailopt&quot; value=&quot;0&quot;&gt;
+    &lt;/td&gt;
+    &lt;td bgcolor=&quot;white&quot;&gt;No, remove me immediately&lt;/td&gt;
+
+    &lt;/table&gt;</pre>
+<p>When the form was then sumbmitted, you would access the values just
+like any other field:</p>
+<pre>
+    if ($form-&gt;field('mailopt')) {
+        # is 1, so add them
+    } else {
+        # is 0, remove them
+    }</pre>
+<p>Finally, you can also loop through each of the fields using the top-level
+<code>fields</code> loop in your template. This allows you to reuse the
+same template even if your parameters change. The following template
+code would loop through each field, creating a table row for each:</p>
+<pre>
+    &lt;table&gt;
+    &lt;tmpl_loop fields&gt;
+    &lt;tr&gt;
+    &lt;td class=&quot;small&quot;&gt;&lt;tmpl_if required&gt;&lt;b&gt;&lt;tmpl_var label&gt;&lt;/b&gt;&lt;tmpl_else&gt;&lt;tmpl_var label&gt;&lt;/tmpl_if&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;tmpl_var field&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tmpl_loop&gt;
+    &lt;/table&gt;</pre>
+<p>Each loop will have a <code>label</code>, <code>field</code>, <code>value</code>, etc, just like above.</p>
+<p>For more information on templates, see <a href="/download/CGI-FormBuilder-3.05/docs/HTML/Template.html">the HTML::Template manpage</a>.</p>
+<p>
+</p>
+
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p><a href="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder.html">the CGI::FormBuilder manpage</a>, <a href="/download/CGI-FormBuilder-3.05/docs/CGI/FormBuilder/Template.html">the CGI::FormBuilder::Template manpage</a>, <a href="/download/CGI-FormBuilder-3.05/docs/HTML/Template.html">the HTML::Template manpage</a></p>
+<p>
+</p>
+
+<h1><a name="revision">REVISION</a></h1>
+<p>$Id: HTML.pm 91 2006-12-18 10:27:01Z nwiger $</p>
+<p>
+</p>
+
+<h1><a name="author">AUTHOR</a></h1>
+<p>Copyright (c) 2000-2006 Nate Wiger &lt;<a href="mailto:nate@wiger.org">nate@wiger.org</a>&gt;. All Rights Reserved.</p>
+<p>This module is free software; you may copy this under the terms of
+the GNU General Public License, or the Artistic License, copies of
+which should have accompanied your Perl kit.</p>
+
+
+
+
+</td></tr></table>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="bar">
+<tr><td align="center" class="bar">
+FormBuilder is &copy; 2000-2006 <a href="/contrib/author.pl" class="bar">Nate Wiger</a>,
+with contributions from <a href="/contrib/" class="bar">many people</a>.
+</td></tr></table>
+<div align="center">
+<a href="http://www.nateware.com/"><img src="/images/nateware_powered.gif"
+ border="0" width="92" height="33" alt="Nateware" /></a>
+</div>
+</body></html>

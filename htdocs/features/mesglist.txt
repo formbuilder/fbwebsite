@@ -1,0 +1,28 @@
+    js_invalid_start      => '%s error(s) were encountered with your submission:',
+    js_invalid_end        => 'Please correct these fields and try again.',
+
+    js_invalid_input      => '- You must enter a valid value for the "%s" field',
+    js_invalid_select     => '- You must choose an option for the "%s" field',
+    js_invalid_checkbox   => '- You must choose an option for the "%s" field',
+    js_invalid_radio      => '- You must choose an option for the "%s" field',
+    js_invalid_password   => '- You must enter a valid value for the "%s" field',
+    js_invalid_textarea   => '- You must fill in the "%s" field',
+    js_invalid_file       => '- You must specify a valid file for the "%s" field',
+
+    form_required_text    => '<p>Fields shown in <b>bold</b> are required.',
+    form_invalid_text     => '<p>%s error(s) were encountered with your submission. Please correct the fields <font color="%s"><b>highlighted</b></font> below.',
+    form_invalid_color    => 'red',
+
+    form_invalid_input    => 'You must enter a valid value',
+    form_invalid_select   => 'You must choose an option from this list',
+    form_invalid_checkbox => 'You must choose an option from this group',
+    form_invalid_radio    => 'You must choose an option from this group',
+    form_invalid_password => 'You must enter a valid value',
+    form_invalid_textarea => 'You must fill in this field',
+    form_invalid_file     => 'You must specify a valid filename',
+
+    form_select_default   => '-select-',
+    form_submit_default   => 'Submit',
+    form_reset_default    => 'Reset',
+    
+    form_confirm_text     => 'Success! Your submission has been received %s.',

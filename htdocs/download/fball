@@ -1,0 +1,6 @@
+for t in CGI-FormBuilder-*.tar*
+do
+    v=`echo $t | sed -e 's/CGI-FormBuilder-//' -e 's/\.tar.*//'`
+    echo `dirname $0`/fbdocs $v
+    `dirname $0`/fbdocs $v
+done

@@ -1,0 +1,65 @@
+HTML::Template 2
+
+Of course, sometimes you want even <i>more</i> control. In addition to
+the <code>&lt;tmpl_var field-[name]&gt;</code> tag you get for each field,
+you also get several other tags:
+<ul>
+    <li><code>&lt;tmpl_var value-[name]&gt;</code> - just the value of the field
+    <li><code>&lt;tmpl_var label-[name]&gt;</code> - the label for the field
+    <li><code>&lt;tmpl_var comment-[name]&gt;</code> - any comment for the field
+    <li><code>&lt;tmpl_var error-[name]&gt;</code> - error if validation fails
+</ul>
+In addition, you also get a <code>&lt;tmpl_loop loop-[name]&gt;</code> tag
+for each field. This can be used to iterate over all the options for a field,
+since the above tags can only hold a single value. Since <code>&lt;tmpl_loop&gt;</code> is
+used in a loop fashion, each iteration provides the following tags:
+<ul>
+    <li><code>&lt;tmpl_var value&gt;</code> - value of that option
+    <li><code>&lt;tmpl_var label&gt;</code> - label for that option
+    <li><code>&lt;tmpl_var checked&gt;</code> - if selected, the word "checked"
+    <li><code>&lt;tmpl_var selected&gt;</code> - if selected, the word "selected"
+</ul>
+So, pulling these two together, you could customize every aspect of HTML layout
+with the following template:
+<pre>
+&lt;!-- email_form2.tmpl --&gt;
+&lt;head&gt;
+&lt;title&gt;foo.com&lt;/title&gt;
+&lt;link rel="stylesheet" href="formstyle.css"&gt;
+<b>&lt;tmpl_var js-head&gt; &lt;!-- JavaScript validation code --&gt;</b>
+&lt;head&gt;
+&lt;body bgcolor=black text=white&gt;
+&lt;p&gt;
+Hi! Welcome to foo.com! Please tell us some basic info:
+&lt;p&gt;
+<b>&lt;tmpl_var form-start&gt;</b>
+<b>&lt;tmpl_var label-name&gt;  &lt;input class="textStyle" name="name" type="text" 
+                              value="&lt;tmpl_var value-name&gt;"&gt;</b>&lt;br&gt;
+<b>&lt;tmpl_var label-email&gt; &lt;input class="textStyle" name="email" type="text"
+                              value="&lt;tmpl_var value-email&gt;"&gt;</b>&lt;br&gt;
+&lt;p&gt;
+Join Mailing List? <b>
+&lt;!-- loop through mlist options --&gt;
+&lt;select name="mlist" class="selectStyle"&gt;
+&lt;tmpl_loop loop-mlist&gt;
+    &lt;option value="&lt;tmpl_var value&gt;" &lt;tmpl_var selected&gt;&gt;
+        &lt;tmpl_var label&gt;
+    &lt;/option&gt;
+&lt;/tmpl_loop&gt;
+&lt;/select&gt;</b>
+&lt;p&gt;
+When you're done, hit the "Submit" button below:&lt;br&gt;
+<b>&lt;tmpl_var form-reset&gt; &lt;tmpl_var form-submit&gt; &lt;!-- buttons --&gt;
+&lt;tmpl_var form-end&gt;</b>
+</pre>
+(Note: <code>HTML::Template</code> allows you to nest your <code>&lt;tmpl_var&gt;</code>
+tags inside other HTML tags, even though this isn't technically valid HTML.)
+<p>
+There is <b>no change</b> to the FormBuilder code! That's the really big
+advantage of templates: You can change the look of the HTML without
+having to touch your CGI code at all. And, of course, since HTML is space
+insensitive you don't have to wrap your tags as shown above; this is done
+for readability.
+<p>
+Take a look at <a href="/ex/email_form2.pl" onClick="miniwin(this)">this script in action</a>,
+along with the <a href="/ex/source.pl?f=email_form2.pl" onClick="miniwin(this)">HTML generated</a>.

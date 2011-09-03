@@ -1,0 +1,59 @@
+Field Data
+
+As we mentioned, the standard way to get at field data is by using the
+<code>field()</code> option along with the name of the field you want, very similar to how
+<code>CGI.pm's param()</code> works:
+
+<pre>
+$email = $form->field('email');    # get "email" field
+</pre>
+
+In the case of multiple values (for example from a multiple <code>select</code>
+list), you can get all the values back simply by requesting an array:
+
+<pre>
+@favorites = $form->field('favorite_colors');
+</pre>
+
+In addition, there are a couple other things you can do. First, you can get a
+list of all field names by calling <code>field()</code> without any options
+in an array context:
+
+<pre>
+<b>@fields = $form->field;</b>
+for (@fields) {
+    # debug field values, the join handles multi-valued fields
+    warn "Value of field '$_' = " . join(',',  $form->field($_));
+}
+</pre>
+
+Second, and perhaps most useful, you can get all of the fields returned as
+a hashref if you call <code>field()</code> without any options in a scalar
+context:
+
+<pre>
+<b>$field = $form->field;           # hashref</b>
+warn "email = $field->{email}";
+warn "mlist = $field->{mlist}";
+</pre>
+
+The advantage to this last method is that you can use it directly in strings,
+and it's much quicker than a function call. The disadvantage is it will only
+return the first value of a field, so won't work for any fields that are multi-valued.
+(Note: If you don't know what a hashref is, don't worry, we'll discuss it in the
+Intermediate Tutorial.)
+<p>
+<b>Important:</b> In <i>all</i> cases, you will <i>only</i> be able to access those fields
+that you have explicitly defined via the <code>fields</code> option to <code>new()</code>.
+FormBuilder intentionally ignores any parameters not listed as valid fields for security
+reasons. To get to extra CGI parameters, you must use the <code>cgi_param()</code> function:
+
+<pre>
+<b>$company = $form->cgi_param('company');</b>
+</pre>
+
+This could be useful if you wanted to do rebranding of a website. For example,
+if a person went to <code>http://hr-outsourcing.com/form.pl?company=mr_propane</code>, a
+different header may appear. However, you would not want this as a form field, since it would
+not be user-modifiable.
+

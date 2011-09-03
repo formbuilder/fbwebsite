@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>FormBuilder - Perl CGI Form Builder CPAN module</title>
+<link type="text/css" rel="stylesheet" href="/layout/style.css" />
+<script src="/js/miniwin.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- top navbar -->
+<table width="100%" border="0" cellspacing="0" class="bar"><tr>
+<td width="228"><a href="/"><img src="/images/fb_logo5.gif" width="228" height="42" 
+ border="0" alt="Perl Form Builder" /></a></td>
+<td class="bar">
+   ::<a href="/features/" class="bar">Features</a>
+   ::<a href="/download/" class="bar">Download</a>
+   ::<a href="/tutor/" class="bar">Tutorial</a>
+   ::<a href="/ex/" class="bar">Examples</a>
+   <br />
+   ::<a href="/docs/" class="bar">Documentation</a>
+   ::<a href="/mailman/listinfo/fbusers" class="bar">Join the Mailing List</a>
+   ::<a href="http://blog.gmane.org/gmane.comp.lang.perl.modules.formbuilder" class="bar">List Archives</a>
+   ::<a href="/contrib/" class="bar">Contribute</a>
+</td>
+<td class="bar" align="center" valign="middle">
+<!-- BEGIN PAYPAL CODE -->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick" />
+<input type="hidden" name="business" value="nate@wiger.org" />
+<input type="hidden" name="item_name" value="FormBuilder development support" />
+<input type="image" src="http://www.paypal.com/images/x-click-but04.gif" 
+name="submit" alt="Donate using PayPal" />
+</form>
+</td>
+</tr>
+</table>
+<!-- spacer -->
+<div id="navspacer"><img src="/images/clear.gif" width="1" height="1"></div>
+<table class="body" border="0" cellpadding="5" cellspacing="0">
+<tr><td valign="top" class="body">
+<!-- opens the left navbar -->
+<table border="0" cellpadding="5" cellspacing="0" class="leftnav">
+<tr>
+<td valign="top" class="leftnav">
+<font size=2>
+<form action="/redirect.pl" method="GET">
+<select name="url" onChange="this.form.submit()">
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Field.html" selected>CGI::FormBuilder::Field</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Messages.html">CGI::FormBuilder::Messages</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Multi.html">CGI::FormBuilder::Multi</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder.html">CGI::FormBuilder</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Source/File.html">CGI::FormBuilder::Source::File</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Source.html">CGI::FormBuilder::Source</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Template/Fast.html">CGI::FormBuilder::Template::Fast</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Template/HTML.html">CGI::FormBuilder::Template::HTML</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Template.html">CGI::FormBuilder::Template</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Template/Text.html">CGI::FormBuilder::Template::Text</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Template/TT2.html">CGI::FormBuilder::Template::TT2</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Test.html">CGI::FormBuilder::Test</option>
+<option value="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder/Util.html">CGI::FormBuilder::Util</option>
+<option value=/docs/>Version other than 3.0302</option>
+</select></form></font>
+<style>ul { margin-left: 0; padding-left: 10px; }</style>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CGI::FormBuilder::Field - Base class for FormBuilder fields</title>
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#new__form___args_">new($form, %args)</a></li>
+		<li><a href="#field__args_"><code>field(%args)</code></a></li>
+		<li><a href="#jsfunc__"><code>jsfunc()</code></a></li>
+		<li><a href="#label__str_"><code>label($str)</code></a></li>
+		<li><a href="#tag__type_"><code>tag($type)</code></a></li>
+		<li><a href="#type__type_"><code>type($type)</code></a></li>
+		<li><a href="#validate__pattern_"><code>validate($pattern)</code></a></li>
+		<li><a href="#invalid">invalid</a></li>
+		<li><a href="#value__val_"><code>value($val)</code></a></li>
+		<li><a href="#tag_value__"><code>tag_value()</code></a></li>
+		<li><a href="#cgi_value__"><code>cgi_value()</code></a></li>
+		<li><a href="#def_value__"><code>def_value()</code></a></li>
+		<li><a href="#accessors">accessors</a></li>
+	</ul>
+
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#revision">REVISION</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<!-- closes the left navbar -->
+</td></tr></table></td><td valign="top" class="body">
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>CGI::FormBuilder::Field - Base class for FormBuilder fields</p>
+<p>
+</p>
+
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+    use CGI::FormBuilder::Field;
+
+    # delegated straight from FormBuilder
+    my $f = CGI::FormBuilder::Field-&gt;new($form, name =&gt; 'whatever');
+
+    # attribute functions
+    my $n = $f-&gt;name;         # name of field
+    my $n = &quot;$f&quot;;             # stringify to $f-&gt;name
+
+    my $t = $f-&gt;type;         # auto-type
+    my @v = $f-&gt;value;        # auto-stickiness
+    my @o = $f-&gt;options;      # options, aligned and sorted
+
+    my $l = $f-&gt;label;        # auto-label
+    my $h = $f-&gt;tag;          # field XHTML tag (name/type/value)
+    my $s = $f-&gt;script;       # per-field JS validation script
+
+    my $m = $f-&gt;message;      # error message if invalid
+    my $m = $f-&gt;jsmessage;    # JavaScript error message
+
+    my $r = $f-&gt;required;     # required?
+    my $k = $f-&gt;validate;     # run validation check
+
+    my $v = $f-&gt;tag_value;    # value in tag (stickiness handling)
+    my $v = $f-&gt;cgi_value;    # CGI value if any
+    my $v = $f-&gt;def_value;    # manually-specified value
+
+    $f-&gt;field(opt =&gt; 'val');  # FormBuilder field() call</pre>
+<p>
+</p>
+
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>This module is internally used by <strong>FormBuilder</strong> to create and maintain
+field information. Usually, you will not want to directly access this
+set of data structures. However, one big exception is if you are going
+to micro-control form rendering. In this case, you will need to access
+the field objects directly.</p>
+<p>To do so, you will want to loop through the fields in order:</p>
+<pre>
+    for my $field ($form-&gt;field) {
+
+        # $field holds an object stringified to a field name
+        if ($field =~ /_date$/) {
+            $field-&gt;sticky(0);  # clear CGI value
+            print &quot;Enter $field here:&quot;, $field-&gt;tag;
+        } else {
+            print $field-&gt;label, ': ', $field-&gt;tag;
+        }
+    }</pre>
+<p>As illustrated, each <code>$field</code> variable actually holds a stringifiable
+object. This means if you print them out, you will get the field name,
+allowing you to check for certain fields. However, since it is an object,
+you can then run accessor methods directly on that object.</p>
+<p>The most useful method is <code>tag()</code>. It generates the HTML input tag
+for the field, including all option and type handling, and returns a 
+string which you can then print out or manipulate appropriately.</p>
+<p>Second to this method is the <code>script</code> method, which returns the appropriate
+JavaScript validation routine for that field. This is useful at the top of
+your form rendering, when you are printing out the leading <code>&lt;head&gt;</code> section
+of your HTML document. It is called by the <code>$form</code> method of the same name.</p>
+<p>The following methods are provided for each <code>$field</code> object.</p>
+<p>
+</p>
+
+<h1><a name="methods">METHODS</a></h1>
+<p>
+</p>
+<h2><a name="new__form___args_">new($form, %args)</a></h2>
+<p>This creates a new <code>$field</code> object. The first argument must be a reference
+to the top-level <code>$form</code> object, for callbacks. The remaining arguments
+should be hash, of which one <code>key/value</code> pair must specify the <code>name</code> of
+the field. Normally you should not touch this method. Ever.</p>
+<p>
+</p>
+<h2><a name="field__args_"><code>field(%args)</code></a></h2>
+<p>This is a delegated field call. This is how <strong>FormBuilder</strong> tweaks its fields.
+Once you have a <code>$field</code> object, you call this method the exact same way
+that you would call the main <code>field()</code> method, minus the field name. Again
+you should use the top-level call instead.</p>
+<p>
+</p>
+<h2><a name="jsfunc__"><code>jsfunc()</code></a></h2>
+<p>Returns the appropriate JavaScript validation code (see above).</p>
+<p>
+</p>
+<h2><a name="label__str_"><code>label($str)</code></a></h2>
+<p>This sets and returns the field's label. If unset, it will be generated
+from the name of the field.</p>
+<p>
+</p>
+<h2><a name="tag__type_"><code>tag($type)</code></a></h2>
+<p>Returns an XHTML form input tag (see above). By default it renders the
+tag based on the type set from the top-level field method:</p>
+<pre>
+    $form-&gt;field(name =&gt; 'poetry', type =&gt; 'textarea');</pre>
+<p>However, if you are doing custom rendering you can override this temporarily
+by passing in the type explicitly. This is usually not useful unless you
+have a custom rendering module that forcibly overrides types for certain
+fields.</p>
+<p>
+</p>
+<h2><a name="type__type_"><code>type($type)</code></a></h2>
+<p>This sets and returns the field's type. If unset, it will automatically 
+generate the appropriate field type, depending on the number of options and
+whether multiple values are allowed:</p>
+<pre>
+    Field options?
+        No = text (done)
+        Yes:
+            Less than 'selectnum' setting?
+                No = select (done)
+                Yes:
+                    Is the 'multiple' option set?
+                    Yes = checkbox (done)
+                    No:
+                        Have just one single option?
+                            Yes = checkbox (done)
+                            No = radio (done)</pre>
+<p>For an example, view the inside guts of this module.</p>
+<p>
+</p>
+<h2><a name="validate__pattern_"><code>validate($pattern)</code></a></h2>
+<p>This returns 1 if the field passes the validation <code>pattern(s)</code> and <code>required</code>
+status previously set via <code>required()</code> and (possibly) the top-level <code>new()</code>
+call in FormBuilder. Usually running per-field <code>validate()</code> calls is not
+what you want. Instead, you want to run the one on <code>$form</code>, which in
+turn calls each individual field's and saves some temp state.</p>
+<p>
+</p>
+<h2><a name="invalid">invalid</a></h2>
+<p>This returns the opposite value that <code>validate()</code> would return, with
+some extra magic that keeps state for form rendering purposes.</p>
+<p>
+</p>
+<h2><a name="value__val_"><code>value($val)</code></a></h2>
+<p>This sets the field's value. It also returns the appropriate value: CGI if
+set, otherwise the manual default value. Same as using <code>field()</code> to
+retrieve values.</p>
+<p>
+</p>
+<h2><a name="tag_value__"><code>tag_value()</code></a></h2>
+<p>This obeys the <code>sticky</code> flag to give a different interpretation of CGI
+values. <strong>Use this to get the value if generating your own tag.</strong> Otherwise,
+ignore it completely.</p>
+<p>
+</p>
+<h2><a name="cgi_value__"><code>cgi_value()</code></a></h2>
+<p>This always returns the CGI value, regardless of <code>sticky</code>.</p>
+<p>
+</p>
+<h2><a name="def_value__"><code>def_value()</code></a></h2>
+<p>This always returns the default value, regardless of <code>sticky</code>.</p>
+<p>
+</p>
+<h2><a name="accessors">accessors</a></h2>
+<p>In addition to the above methods, accessors are provided for directly 
+manipulating values as if from a <code>field()</code> call:</p>
+<pre>
+    Accessor                Same as...                        
+    ----------------------- -----------------------------------
+    $f-&gt;force(0|1)          $form-&gt;field(force =&gt; 0|1)
+    $f-&gt;options(\@opt)      $form-&gt;field(options =&gt; \@opt)
+    $f-&gt;multiple(0|1)       $form-&gt;field(multiple =&gt; 0|1)
+    $f-&gt;message($mesg)      $form-&gt;field(message =&gt; $mesg)
+    $f-&gt;jsmessage($mesg)    $form-&gt;field(jsmessage =&gt; $mesg)
+    $f-&gt;jsclick($code)      $form-&gt;field(jsclick =&gt; $code)
+    $f-&gt;sticky(0|1)         $form-&gt;field(sticky =&gt; 0|1);
+    $f-&gt;force(0|1)          $form-&gt;field(force =&gt; 0|1);
+    $f-&gt;growable(0|1)       $form-&gt;field(growable =&gt; 0|1);
+    $f-&gt;other(0|1)          $form-&gt;field(other =&gt; 0|1);</pre>
+<p>
+</p>
+
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p><a href="/download/CGI-FormBuilder-3.0302/docs/CGI/FormBuilder.html">the CGI::FormBuilder manpage</a></p>
+<p>
+</p>
+
+<h1><a name="revision">REVISION</a></h1>
+<p>$Id: Field.pm,v 1.71 2006/02/24 01:42:29 nwiger Exp $</p>
+<p>
+</p>
+
+<h1><a name="author">AUTHOR</a></h1>
+<p>Copyright (c) 2000-2006 Nate Wiger &lt;<a href="mailto:nate@wiger.org">nate@wiger.org</a>&gt;. All Rights Reserved.</p>
+<p>This module is free software; you may copy this under the terms of
+the GNU General Public License, or the Artistic License, copies of
+which should have accompanied your Perl kit.</p>
+
+
+
+
+</td></tr></table>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="bar">
+<tr><td align="center" class="bar">
+FormBuilder is &copy; 2000-2006 <a href="/contrib/author.pl" class="bar">Nate Wiger</a>,
+with contributions from <a href="/contrib/" class="bar">many people</a>.
+</td></tr></table>
+<div align="center">
+<a href="http://www.nateware.com/"><img src="/images/nateware_powered.gif"
+ border="0" width="92" height="33" alt="Nateware" /></a>
+</div>
+</body></html>

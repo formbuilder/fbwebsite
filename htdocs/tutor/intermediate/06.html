@@ -1,0 +1,49 @@
+Input Validation 2
+
+The simple validation with built-in patterns is often all that most
+people need. However, occassionally you may run into situations where
+you need to specify an exact regular expression, or set of values
+which the data must be within.
+<p>
+Doing so is easy. For each field you list in the <code>validate</code>
+option, you can specify the following:
+<ul>
+    <li>The name of a built-in pattern, as we saw previously
+    <li>A custom regular expression, <i>in single quotes</i>
+    <li>An arrayref of values, of which the field must be one
+    <li>A hashref of JavaScript and Perl-specific validations
+</ul>
+So, tossing all these together, one could write a validation set
+like the following:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             fields   => [qw/full_name username email dept_num
+                             password confirm_password/],
+             validate => {
+                full_name => '/\w+\s+\w+.*/',
+                username  => '/^[a-zA-Z]\w{5,7}$/',
+                email     => 'EMAIL',
+                dept_num  => [110923, 398122, 918923, 523211],
+                password  => '/^[\w.!?@#$%&*]{6,8}$/'
+                confirm_password => {
+                      javascript => '== form.password.value',
+                      perl       => 'eq $form->field("password")'
+                }
+             }
+        );
+</pre>
+This would create both JavaScript and Perl conditionals on the fly
+that would ensure:
+<ul>
+    <li><code>name</code> is at least 2 words long
+    <li><code>username</code> starts with a letter, and is 6-8 characters total
+    <li><code>email</code> is a valid email address
+    <li><code>password</code> is 6-8 of the specified characters
+    <li><code>confirm_password</code> is the same as the <code>password</code> field
+</ul>
+Remember, <i>any regular expressions you specify must be enclosed in single quotes
+because they need to be used for both JavaScript and Perl code.</i>
+<p>
+To get a sense of how much is done for you, take a look at <a href="/ex/advanced_validation.pl" onClick="miniwin(this)">this
+script in action</a>, as well as the <a href="/ex/source.pl?f=advanced_validation.pl" onClick="miniwin(this)">HTML source</a>.

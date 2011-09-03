@@ -1,0 +1,36 @@
+Intro to FormBuilder
+
+Welcome to the FormBuilder Tutorial! This step-by-step tutorial will walk you
+through the usage of FormBuilder, from basic forms to advanced templates
+and multilingual messages. You can read these in series by clicking
+on the "Next" and "Previous" links, or skip directly to a topic using
+the navbar to the left.
+<p>
+<b>Basics</b>
+<p>
+FormBuilder is designed to handle all parts of a CGI form request - generation,
+submission, and validation. As such, FormBuilder applications will usually
+loop back on themselves. That is, you will have a single script that, when
+invoked, will take care of your entire application just based on the CGI
+parameters.
+<p>
+FormBuilder uses an Object-Oriented calling-style, but don't let that scare
+you away. Usage is exceedingly easy, as there are only a couple functions
+you need to know about. Throughout the documentation, our FormBuilder object
+will always be identified as <code>$form</code>, and you'll find this works
+equally well in your own scripts.
+<p>
+Here are the basic steps:
+<ol>
+    <li>Create a <code>$form</code> object with <code>CGI::FormBuilder-&gt;new()</code>
+    <li>Define your form fields with the <code>$form-&gt;field()</code> method.
+    <li>Check for whether the form was submitted with <code>$form-&gt;submitted</code>,
+        and if so, validate it with <code>$form-&gt;validate</code>.
+    <li>Get to individual values using the <code>$form-&gt;field()</code>
+        method, and do whatever you need to with the data (update a database, etc).
+    <li>If the form wasn't submitted (or fails validation), print it out using
+        the main <code>$form-&gt;render</code> function.
+</ol>
+That's all there is to it! FormBuilder will take care of HTML and JavaScript
+generation, table layout, validation, stickiness, error messages, and so forth.
+Let's look at a basic FormBuilder script.

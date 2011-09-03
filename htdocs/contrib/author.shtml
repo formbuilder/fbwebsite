@@ -1,0 +1,17 @@
+<!--#include virtual="/layout/header.html"-->
+<b>About the Author</b><br>
+Nate Wiger (that's me) is a Programmer/Analyst for Sony Playstation Online Games.
+Previously I worked for Sun Microsystems for 7 years. I've written a number of
+<a href="http://search.cpan.org/~nwiger/">CPAN modules</a>, most of which
+are aimed towards simplifying CGI and HTML processing, since both suck
+glowing donkey balls.
+<p>
+I wrote a book a while back for Sun entitled <a href="http://www.amazon.com/exec/obidos/tg/detail/-/013045494X/qid=1034008107/sr=8-1/ref=sr_8_1/104-1346661-9831955?v=glance&n=507846/brewlabelsnet" target=_blank>Sun Fire Systems Design and
+Configuration Guide</a>, which is available from
+<a href="http://www.amazon.com/exec/obidos/tg/detail/-/013045494X/qid=1034008107/sr=8-1/ref=sr_8_1/104-1346661-9831955?v=glance&n=507846/brewlabelsnet" target=_blank>Amazon</a> or the
+<a href="http://www.sun.com/blueprints/pubs.html" target=_blank>Sun Blueprints Press</a>. 
+I also play guitar and sing in the San Diego band
+<a href="http://www.nomeansmaybe.com/">No Means Maybe</a>, so check us out
+if you're bored.
+<p>
+<!--#include virtual="/layout/footer.html"-->

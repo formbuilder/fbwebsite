@@ -1,0 +1,73 @@
+Multi-Select Lists
+
+In the previous step, we saw how to create single-valued lists. That is,
+<code>radio</code> groups and standard <code>select</code> lists. Each
+of these allows the user to return a single value.
+<p>
+To allow a field to return multiple values, all you need to do is specify
+the <code>multiple</code> option to <code>field()</code>:
+
+<pre>
+$form->field(name     => 'favorite_colors',
+             options  => \@colors,<b>
+             multiple => 1</b>);
+</pre>
+
+This would allow the <code>favorite_colors</code> field to return
+one or more of the items from the <code>@colors</code> array, which
+are presumably colors.
+<p>
+Now, what does this mean in terms of our HTML layout? Well, if there
+are only 4 or fewer colors, they'll be placed in a checkbox group,
+like so:
+
+<pre>
+&lt;input name="favorite_colors" type="checkbox" value="Red"&gt; Red
+&lt;input name="favorite_colors" type="checkbox" value="Green"&gt; Green
+&lt;input name="favorite_colors" type="checkbox" value="Blue"&gt; Blue
+</pre>
+
+Checkboxes will allow the user to see all the options, and choose
+the ones that they want. (The number 4 was actually picked in response to
+some user interface studies done on how many items people can remember.)
+<p>
+However, if there are more than 4 items, obviously checkboxes will become
+too cluttered, so FormBuilder automatically converts the field to a <code>select</code> list:
+
+<pre>
+&lt;select name="favorite_colors" multiple&gt;
+&lt;option value="Red"&gt;Red&lt;/option&gt;
+&lt;option value="Green"&gt;Green&lt;/option&gt;
+&lt;option value="Blue"&gt;Blue&lt;/option&gt;
+&lt;option value="Yellow"&gt;Yellow&lt;/option&gt;
+&lt;option value="Orange"&gt;Orange&lt;/option&gt;
+&lt;option value="Purple"&gt;Purple&lt;/option&gt;
+&lt;/select&gt;
+</pre>
+
+Again, all this magic can be overridden. To force a <code>select</code> list
+regardless of the number of options, all you have to do is explicitly
+specify the <code>type</code>:
+
+<pre>
+$form->field(name     => 'favorite_colors',
+             <b>type     => 'select',</b>
+             options  => \@colors,
+             <b>multiple => 1</b>);
+</pre>
+
+In all situations, FormBuilder will automatically handle multiple stickiness
+correctly. If the person clicks multiple items and the form needs to be
+reloaded (as happens when validation fails), the correct items will remain
+selected.
+<p>
+Finally, since these fields can have multiple values, in order to get all
+the values accurately, you need to request an array from the <code>field()</code>
+function:
+
+<pre>
+@favorites = $form->field('favorite_colors');
+</pre>
+
+The array <code>@favorites</code> will contain all of the options that
+the user selected for that field.

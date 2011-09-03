@@ -1,0 +1,4 @@
+<!--#include virtual="/layout/header.html"-->
+<p class="label">401 Authorization Required</p>
+You don't have a username/password for this part of the site.
+<!--#include virtual="/layout/footer.html"-->

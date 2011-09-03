@@ -1,0 +1,39 @@
+Form Method
+
+By default, FormBuilder sends form data via <code>get</code>, as the
+CGI specification states. However, for many types of forms, you want
+to send them via <code>post</code>, since this prevents caching and
+bookmarking on the client side.
+<p>
+Doing so is easy, simply change the <code>method</code> in <code>new()</code>:
+
+<pre>
+$form = CGI::FormBuilder->new(<b>
+             method => 'post',</b>
+             fields => \@fields,
+        );
+</pre>
+
+(Note: The order you specify options in never matters to FormBuilder.)
+<p>
+In fact, you can pass in any valid <code>&lt;form&gt;</code> tag
+attribute and it will go directly into the top of the form:
+
+<pre>
+$form = CGI::FormBuilder->new(<b>
+             method  => 'post',
+             name    => 'personal_info',
+             enctype => 'multipart/form-data',</b>
+             fields  => \@fields,
+        );
+</pre>
+
+Naming your form with the <code>name</code> option has special
+usefulness with multi-screen forms, as we'll see later.
+<p>
+Finally, note that you can change the <code>action</code> in the same way,
+although usually for FormBuilder applications this is not desired (since
+FormBuilder handles the entire process).
+<p>
+Take a minute to play around with this <a href="/ex/form_method.pl" onClick="miniwin(this)">script in action</a>,
+and <a href="/ex/source.pl?f=form_method.pl" onClick="miniwin(this)">view the source</a> as well.

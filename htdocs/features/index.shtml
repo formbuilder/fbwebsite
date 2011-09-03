@@ -1,0 +1,102 @@
+<!--#include virtual="/layout/header.html"-->
+
+<p class="label">New Features and Bug Fixes</p>
+To get the latest scoop on what's new in FormBuilder, you should visit
+the <a href=/download/>download</a> section and read the release notes.
+
+<p class="label">FormBuilder Features</p>
+This module was created because I just plain <b>hate</b> form generation and
+validation, as the majority of the process is tedious and mindless. In
+addition to being boring, there is too much room for simple error, which
+could render your application insecure or even useless.
+<p>
+FormBuilder gets rid of the repetitive parts, leaving you to
+concentrate on the high-level tasks. It generates flawless HTML and 
+JavaScript, and has been endlessly tested for security holes. It is
+the culimation of several years of development and use. Here are some
+of its main features:
+<p>
+
+<dl>
+  <dt>DWIMmery</dt>
+  <dd>
+    This module tries to "Do What I Mean". Tell it the fields you care
+    about, and it takes care of all the stupid HTML and JavaScript
+    generation and processing for you. It also gives you back the correct
+    values that you want. It will even label your fields automatically
+    with human-readable names.
+  </dd>
+
+  <dt>Input field abstraction</dt>
+  <dd>
+    You simply define your fields and their options, and FormBuilder will
+    take care of figuring out what the best HTML representation is. It will then
+    generate the appropriate input fields (text, select, radio, etc), even
+    changing any JavaScript actions appropriately.
+  </dd>
+
+  <dt>Easy handling of defaults</dt>
+  <dd>
+    Just specify a hash of values to use as the defaults for your fields.
+    This will be searched case-insensitively and displayed in the form.
+    What's more, if the user enters something via the CGI that overrides a
+    default, when you use the <code>field()</code> method to get the data you'll get
+    the correct value.
+  </dd>
+
+  <dt>Correct stickiness</dt>
+  <dd>
+    Stickiness is a PITA. FormBuilder correctly handles even multiple values
+    selected in a multiple select list, completely integrated with proper handling
+    of defaults.
+  </dd>
+
+  <dt>Robust field validation</dt>
+  <dd>
+    Form validation sucks, and this is where FormBuilder is a big help. It
+    has tons of builtin patterns, and will even generate gobs of JavaScript
+    validation code for you. You can specify your own regexps as well, and
+    FormBuilder will even check multivalued select lists correctly. See
+    the <a href="patterns.shtml">full list of built-in patterns</a>.
+  </dd>
+
+  <dt>Multiple submit mode support</dt>
+  <dd>
+    FormBuilder allows you to reliably tell whether the person clicked on
+    the "Update" or "Delete" button of your form, normally a big pain.
+  </dd>
+
+  <dt>Template driver support</dt>
+  <dd>
+    FormBuilder can natively "drive" several major templating engines:
+<ul>
+    <li><a href="http://search.cpan.org/~samtregar/HTML-Template-2.7/" target="_blank">HTML::Template</a></li>
+    <li><a href="http://search.cpan.org/~jmoore/CGI-FastTemplate-1.09/" target="_blank">CGI::FastTemplate</a></li>
+    <li><a href="http://search.cpan.org/~mjd/Text-Template-1.44/" target="_blank">Text::Template</a></li>
+    <li><a href="http://search.cpan.org/~abw/Template-Toolkit-2.14/" target="_blank">Template Toolkit</a></li>
+</ul>
+    If you want to build a complete form application with a template in less that
+    20 lines of Perl, FormBuilder is for you.
+  </dd>
+
+  <dt>Internationalized, Customizable Messaging</dt>
+  <dd>
+    Sick of US-centric modules? You can customize every single message that
+    FormBuilder outputs for your locale. See the full <a href="messages.shtml">messages list</a>.
+  </dd>
+
+  <dt>Simple Interface</dt>
+  <dd>
+    Heck, I specialized in User Interface Design for my degree!
+  </dd>
+
+  <dt>Extensive Documentation</dt>
+  <dd>
+    In case you haven't figured it out yet, there's a whole website devoted
+    to FormBuilder. :-)
+  </dd>
+</dl>
+If you like the sound of FormBuilder, you should <a href="/download/">download the latest
+version</a>, then go through the <a href="/tutor/">online tutorial</a>.
+
+<!--#include virtual="/layout/footer.html"-->

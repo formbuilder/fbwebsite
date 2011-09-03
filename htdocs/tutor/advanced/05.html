@@ -1,0 +1,87 @@
+Template Toolkit
+
+<code>Template Toolkit</code> is more flexible, but looks a little more
+like code in your HTML. Form fields are actually represented as properties
+of a <code>form</code> object, separated by dots. Each <code>Template Toolkit</code>
+action is denoted within square brackets and percent signs.
+<p>
+Here are the equivalent tags between template modules:
+<p>
+<table border=1 width=500>
+<tr><th><font face="arial,helvetica">HTML::Template</th><th><font face="arial,helvetica">Template Toolkit</th></tr>
+<tr><td><code> &lt;tmpl_var js-head&gt;</td><td><code> [% form.jshead %]</td></tr>
+<tr><td><code> &lt;tmpl_var form-start&gt;</td><td><code> [% form.start %]</td></tr>
+<tr><td><code> &lt;tmpl_var form-reset&gt;</td><td><code> [% form.reset %]</td></tr>
+<tr><td><code> &lt;tmpl_var form-submit&gt;</td><td><code> [% form.submit %]</td></tr>
+<tr><td><code> &lt;tmpl_var form-end&gt;</td><td><code> [% form.end %]</td></tr>
+<tr><td><code> &lt;tmpl_var field-[name]&gt;</td><td><code> [% form.field.[name].field %]</td></tr>
+<tr><td><code> &lt;tmpl_var value-[name]&gt;</td><td><code> [% form.field.[name].values %]</td></tr>
+<tr><td><code> &lt;tmpl_var label-[name]&gt;</td><td><code> [% form.field.[name].label %]</td></tr>
+<tr><td><code> &lt;tmpl_var comment-[name]&gt;</td><td><code> [% form.field.[name].comment %]</td></tr>
+<tr><td><code> &lt;tmpl_loop loop-[name]&gt;</td><td><code> [% form.field.[name].options %]</td></tr>
+</table>
+<p>
+So, a similar template to our original <code>HTML::Template</code> written
+in <code>Template Toolkit</code> may look like this:
+<p>
+<pre>
+&lt;!-- email_form.tt2 --&gt;
+&lt;head&gt;
+&lt;title&gt;foo.com&lt;/title&gt;
+<b>[% form.jshead %] &lt;!-- JavaScript validation code --&gt;</b>
+&lt;head&gt;
+&lt;body bgcolor=black text=white&gt;
+&lt;font face="times,serif"&gt;
+&lt;p&gt;
+Hi! Welcome to foo.com! Please tell us some basic info:
+&lt;p&gt;
+<b>[% form.start %]</b>
+Your Name: <b>[% form.field.name.field %]</b>&lt;br&gt;
+Your Email: <b>[% form.field.email.field %]</b>&lt;br&gt;
+&lt;p&gt;
+Join Mailing List? <b>[% form.field.mlist.field %]</b>
+&lt;p&gt;
+When you're done, hit the "Submit" button below:&lt;br&gt;
+<b>[% form.reset %] [% form.submit %] &lt;!-- buttons --&gt;
+[% form.end %]</b>
+</pre>
+
+Since <code>Template Toolkit</code> can handle complex data structures,
+you can do fancy stuff you can't do in <code>HTML::Template</code>, like
+loop through fields:
+
+<pre>
+<b>[% FOREACH field = form.fields %]</b>
+    &lt;tr valign="top"&gt;
+      &lt;td&gt;
+        <b>[% field.required 
+              ? "&lt;b&gt;$field.label&lt;/b&gt;" 
+              : field.label 
+        %]</b>
+      &lt;td&gt;
+      &lt;td&gt;
+        <b>[% IF field.invalid %]
+        Missing or invalid entry, please try again.</b>
+    &lt;br&gt;
+<b>[% END %]</b>
+</pre>
+
+Again, just like with <code>HTML::Template</code>, your FormBuilder code
+<b>does not change!</b> With the exception of adding the <code>template</code>
+option, everything else about FormBuilder remains the exact same:
+
+<pre>
+$form = CGI::FormBuilder->new(
+             method => 'post',
+             fields => \@fields,
+             template => {
+                 <b>type => 'TT2',</b>     # Template Toolkit
+                 template => '/path/to/file.tmpl',
+                 <b>variable => 'form'</b>
+             }
+        );
+</pre>
+
+For more information on <code>Template Toolkit</code>, please consult its
+documentation.
+

@@ -1,0 +1,171 @@
+
+=head1 NAME
+
+Changes - Changes in FormBuilder 3.0, please also see the README
+
+=head1 COMPATIBILITY
+
+For changes between 3.000 and 3.001, skip down to L</REVISIONS>.
+
+FormBuilder 3.0 should be completely compatible with FormBuilder 2.x,
+with the singular exception that you can no longer use the shortcut
+autoload style of getting to fields:
+
+    $form->field(name => 'category', options => \@opt);
+    $form->category(options => \@opt);      # WRONG
+
+The second form is now used to manipulate C<$form> attributes.
+
+=head1 INTERNALS
+
+The internals have been completely rewritten, nearly from the ground up.
+All of the major functions have been split into methods, and objects have
+been created for the form, fields, messages, CGI params, and so on. Several
+new sub-modules have been created, including:
+
+    CGI::FormBuilder::Field
+    CGI::FormBuilder::Messages
+    CGI::FormBuilder::Template
+    CGI::FormBuilder::Template::HTML
+    CGI::FormBuilder::Template::Text
+    CGI::FormBuilder::Template::TT2
+
+Many of these modules can be subclassed and overridden if desired. In 
+addition, the template engine has been rewritten to allow "plugging in"
+of additional template modules, simply by specifying the name of the
+module to the 'template' option in new().
+
+For more details, see the man pages for the individual modules above.
+
+=head1 NEW FEATURES
+
+Several new features have been added which B<FormBuilder> 2.x could
+not support:
+
+=head2 Style Sheets
+
+Stylesheets are now generated if the C<stylesheet> option is specified
+to B<FormBuilder>. This can either be C<1> to turn it on, or a full
+path to a style sheet to include. When used, all tags are then output
+with a C<class> attribute, named C<styleclass> plus the name of
+the tag:
+
+    my $form = CGI::FormBuilder->new(
+                    fields => [qw/name email/],
+                    styleclass => 'myFB',   # default is "fb_"
+                    stylesheet => 1,        # turn on style
+               );
+                
+    print $form->render;
+
+    # HTML will include
+    #   <input class="myFBname" id="name" name="name" type="text" />
+    #   <input class="myFBemail" id="email" name="email" type="text" />
+
+=head2 Compliant XHTML
+
+The output should be fully-compliant XHTML finally. Really. Maybe.
+
+=head2 Attributes and Field Objects
+
+Individual accessors have been added for every attribute that FormBuilder
+maintains. For example, here's a snippet of code to demonstrate:
+
+    if ($form->stylesheet) {
+        # loop thru fields, changing class
+        for ($form->fields) {
+            next if /_date$/;   # skip fields named "XXX_date"
+
+            # each field is a stringifiable object with accessors
+            if ($_->options) {
+                # has options
+                $_->class('my_opt_style');
+            } else {
+                # plain text box
+                $_->class('my_text_style');
+            }
+        }
+    }
+
+This code checks to see if the C<stylesheet> property has been set on
+the main C<$form>. If so, then it loops thru all the fields, skipping
+those named C<XXX_date>. Of the remaining fields, those that have options
+have their C<class> attribute changed to C<my_opt_style>, and those 
+without options have it set to C<my_text_style>.
+
+In addition, you can individually render every part of the form yourself.
+by calling the appropriate method. For example:
+
+    print $form->header;      # just the header
+    print $form->script;      # opening JavaScript
+    print $form->title;       # form title
+    print $form->start;       # opening <form> tag
+    for ($form->fields) {
+        print $_->label;      # each field's human label
+        print $_->tag;        # each field's <input> tag
+    }
+    print $form->end;         # closing </form> tag
+
+For a complete list of accessors, see the documentation for both
+L<CGI::FormBuilder> and L<CGI::FormBuilder::Field>.
+
+=head2 Messages
+
+Some messages have been reworded to make it easier to change just a single
+message, and a couple new messages were added as well:
+
+     js_noscript             <p><font color="red"><b>Please enable JavaScript or
+                             use a newer browser.</b></font></p>
+
+     form_required_text      <p>Fields that are %s highlighted %s are required.</p>
+     form_required_opentag   <b>
+     form_required_closetag  </b>
+
+     form_invalid_text       <p>%s error(s) were encountered with your submission.
+                             Please correct the fields %s highlighted %s below.</p>
+     form_invalid_opentag    <font color="red"><b>
+     form_invalid_closetag   </font></b>
+
+     js_invalid_default      - You must enter a valid value for the "%s" field
+     form_invalid_default    You must enter a valid value
+
+For more details, see C<CGI::FormBuilder::Messages>.
+
+=head2 HTML::Entities encoding
+
+HTML character encoding is now dispatched to C<HTML::Entities>, if available.
+This can be downloaded as part of the C<HTML::Parser> module set on CPAN.
+
+=head2 Documentation
+
+Documentation has been updated and somewhat reorganized, which was long
+overdue.
+
+=head1 BUGFIXES
+
+=head2 3.001
+
+    - fixed major problems with keepextras, including a reversed ismember test
+    - added debug messages to keepextras and changed a few other debugs
+    - added patch from Peter Eichman to fix scalar $field->tag and $field->tag_value
+    - converted most all XHTML generation methods to only returning scalars
+    - fixed the columns option which was totally broken for radio buttons
+    - added a feature to plop in {border => 0} in columns as well
+    - added the 2.x 'override' alias for field() 'force' which was missing
+    - also added a 'defaults' alias for field() 'value' for CGI.pm happiness
+    - more tests since there were way too many bugs
+    - a ton of documentation cleanup, these docs used to suck
+
+=head2 3.000
+
+    - many edge-case 2.x bugs, such as field(value => '')
+
+=head1 AUTHOR
+
+Copyright (c) 2000-2005 Nathan Wiger, Sun Microsystems <nate@sun.com>.
+All Rights Reserved.
+
+This module is free software; you may copy this under the terms of
+the GNU General Public License, or the Artistic License, copies of
+which should have accompanied your Perl kit.
+

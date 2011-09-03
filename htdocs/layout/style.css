@@ -1,0 +1,131 @@
+/* 
+ * Copyright (c) 2005-2006 Nathan Wiger <nate@wiger.org>
+ *
+ * fblue.css - blue and white FormBuilder website scheme
+ */
+
+a.bar {
+    color: white;
+    font-family: verdana,arial,helvetica;
+    font-weight: bold;
+}
+.bar {
+    color: white;
+    font-family: verdana,arial,helvetica;
+    background: #3399CC;
+    font-size: 10pt;
+}
+
+a.mark {
+    color: #CC0000;
+    font-weight: bold;
+    font-family: verdana,arial,helvetica
+}
+.mark { color: #CC0000; font-weight: bold }
+
+table.body {
+    width: 100%;
+    height: 500px;
+}
+
+.body {
+    font-family: verdana,arial,helvetica;
+    color: #000000;
+    font-size: 9pt;
+}
+
+h1 {
+    font-family: verdana,arial,helvetica;
+    font-size: 110%;
+    font-weight: bold;
+    /*display: inline;*/
+    text-align: left;
+}
+
+h2,h3 {
+    font-family: verdana,arial,helvetica;
+    font-size: 100%;
+    font-weight: bold;
+    /*display: inline;*/
+    text-align: left;
+}
+
+body {
+    font-family: verdana,arial,helvetica;
+    color: #000000;
+    margin: 0px;
+    font-size: 9pt;
+}
+
+/* links are blue */
+a {
+    color: #3090c0;
+}
+a:hover {
+    color: #3090c0;
+    background: #ddd;
+}
+
+/* control code blocks */
+pre {
+    font-family: "courier new", courier;
+    font-size: 9pt;
+    background: #FFFFCC;
+    width: 550px;
+    margin: 4px;
+    padding: 10px;
+    border: thin solid;
+}
+
+code {
+    font-family: "courier new", courier;
+    xcolor: #003366;
+    font-weight: bold;
+}
+
+dt {
+    font-weight: bold;
+    color: #003366;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+dd {
+    margin-left: 2em;
+}
+
+p.labelgray {
+    font-weight: bold;
+    margin: 1em 0 0 0;
+    color: #993300;
+    background: #ddd;
+    padding-left: 1em;
+}
+
+p.label {
+    font-weight: bold;
+    margin: 1em 0 0 0;
+    color: #003366;
+    background: #ddd;
+    padding: 1px;
+}
+
+/* left navbar for tutorial */
+table.leftnav {
+    background: #f0f0f0;
+    font-family: arial,helvetica;
+    border: thin solid;
+    width: 180px;
+}
+
+/* thin strip up top */
+#navspacer {
+    background: #003366;
+    margin: 0px;
+    padding: 0px;
+    font-family: arial,helvetica,sans-serif;
+    font-size: 1pt;
+    height: 4px;
+    width: 100%;
+}
+

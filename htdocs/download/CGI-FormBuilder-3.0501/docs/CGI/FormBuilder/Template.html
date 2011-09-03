@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>FormBuilder - Perl CGI Form Builder CPAN module</title>
+<link type="text/css" rel="stylesheet" href="/layout/style.css" />
+<script src="/js/miniwin.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- top navbar -->
+<table width="100%" border="0" cellspacing="0" class="bar"><tr>
+<td width="228"><a href="/"><img src="/images/fb_logo5.gif" width="228" height="42" 
+ border="0" alt="Perl Form Builder" /></a></td>
+<td class="bar">
+   ::<a href="/features/" class="bar">Features</a>
+   ::<a href="/download/" class="bar">Download</a>
+   ::<a href="/tutor/" class="bar">Tutorial</a>
+   ::<a href="/ex/" class="bar">Examples</a>
+   <br />
+   ::<a href="/docs/" class="bar">Documentation</a>
+   ::<a href="/mailman/listinfo/fbusers" class="bar">Join the Mailing List</a>
+   ::<a href="http://blog.gmane.org/gmane.comp.lang.perl.modules.formbuilder" class="bar">List Archives</a>
+   ::<a href="/contrib/" class="bar">Contribute</a>
+</td>
+<td class="bar" align="center" valign="middle">
+<!-- BEGIN PAYPAL CODE -->
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick" />
+<input type="hidden" name="business" value="nate@wiger.org" />
+<input type="hidden" name="item_name" value="FormBuilder development support" />
+<input type="image" src="http://www.paypal.com/images/x-click-but04.gif" 
+name="submit" alt="Donate using PayPal" />
+</form>
+</td>
+</tr>
+</table>
+<!-- spacer -->
+<div id="navspacer"><img src="/images/clear.gif" width="1" height="1"></div>
+<table class="body" border="0" cellpadding="5" cellspacing="0">
+<tr><td valign="top" class="body">
+<!-- opens the left navbar -->
+<table border="0" cellpadding="5" cellspacing="0" class="leftnav">
+<tr>
+<td valign="top" class="leftnav">
+<font size=2>
+<form action="/redirect.pl" method="GET">
+<select name="url" onChange="this.form.submit()">
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder.html">CGI::FormBuilder</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder.html">CGI::FormBuilder</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Field.html">CGI::FormBuilder::Field</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Messages.html">CGI::FormBuilder::Messages</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Multi.html">CGI::FormBuilder::Multi</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Source.html">CGI::FormBuilder::Source</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Source/File.html">CGI::FormBuilder::Source::File</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template.html" selected>CGI::FormBuilder::Template</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/Builtin.html">CGI::FormBuilder::Template::Builtin</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/Div.html">CGI::FormBuilder::Template::Div</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/Fast.html">CGI::FormBuilder::Template::Fast</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/HTML.html">CGI::FormBuilder::Template::HTML</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/TT2.html">CGI::FormBuilder::Template::TT2</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/Text.html">CGI::FormBuilder::Template::Text</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Test.html">CGI::FormBuilder::Test</option>
+<option value="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Util.html">CGI::FormBuilder::Util</option>
+<option value=/docs/>Version other than 3.0501</option>
+</select></form></font>
+<style>ul { margin-left: 0; padding-left: 10px; }</style>
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CGI::FormBuilder::Template - Template adapters for FormBuilder</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#subclassing_template_adapters">SUBCLASSING TEMPLATE ADAPTERS</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#revision">REVISION</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<!-- closes the left navbar -->
+</td></tr></table></td><td valign="top" class="body">
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>CGI::FormBuilder::Template - Template adapters for FormBuilder</p>
+<p>
+</p>
+
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+    # Define a template engine
+
+    package CGI::FormBuilder::Template::Whatever;
+    use base 'Whatever::Template::Module';
+
+    sub new {
+        my $self  = shift;
+        my $class = ref($self) || $self;
+        my %opt   = @_;
+
+        # override some options
+        $opt{some_setting} = 0;
+        $opt{another_var}  = 'Some Value';
+
+        # instantiate the template engine
+        $opt{engine} = Whatever::Template::Module-&gt;new(%opt);
+
+        return bless \%opt, $class;
+    }
+
+    sub render {
+        my $self = shift;
+        my $form = shift;   # only arg is form object
+
+        # grab any manually-set template params
+        my %tmplvar = $form-&gt;tmpl_param;
+
+        # example template manipulation
+        my $html = $self-&gt;{engine}-&gt;do_template(%tmplvar);
+
+        return $html;       # scalar HTML is returned
+    }</pre>
+<p>
+</p>
+
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>This documentation describes the usage of <strong>FormBuilder</strong> templates,
+as well as how to write your own template adapter.</p>
+<p>The template engines serve as adapters between CPAN template modules
+and <strong>FormBuilder</strong>. A template engine is invoked by using the <code>template</code>
+option to the top-level <code>new()</code> method:</p>
+<pre>
+    my $form = CGI::FormBuilder-&gt;new(
+                    template =&gt; 'filename.tmpl'
+               );</pre>
+<p>This example points to a filename that contains an <code>HTML::Template</code>
+compatible template to use to layout the HTML. You can also specify
+the <code>template</code> option as a reference to a hash, allowing you to
+further customize the template processing options, or use other
+template engines.</p>
+<p>For example, you could turn on caching in <code>HTML::Template</code> with
+something like the following:</p>
+<pre>
+    my $form = CGI::FormBuilder-&gt;new(
+                    fields =&gt; \@fields,
+                    template =&gt; {
+                        filename =&gt; 'form.tmpl',
+                        shared_cache =&gt; 1
+                    }
+               );</pre>
+<p>As mentioned, specifying a hashref allows you to use an alternate template
+processing system like the <code>Template Toolkit</code>.  A minimal configuration
+would look like this:</p>
+<pre>
+    my $form = CGI::FormBuilder-&gt;new(
+                    fields =&gt; \@fields,
+                    template =&gt; {
+                        type =&gt; 'TT2',      # use Template Toolkit
+                        template =&gt; 'form.tmpl',
+                    },
+               );</pre>
+<p>The <code>type</code> option specifies the name of the engine. Currently accepted
+types are:</p>
+<pre>
+    Builtin -  Included, default rendering if no template specified
+    Div     -  Render form using &lt;div&gt; (no tables)
+    HTML    -  HTML::Template
+    Text    -  Text::Template
+    TT2     -  Template Toolkit
+    Fast    -  CGI::FastTemplate</pre>
+<p>In addition to one of these types, you can also specify a complete package name,
+in which case that module will be autoloaded and its <code>new()</code> and <code>render()</code>
+routines used. For example:</p>
+<pre>
+    my $form = CGI::FormBuilder-&gt;new(
+                    fields =&gt; \@fields,
+                    template =&gt; {
+                        type =&gt; 'My::Template::Module',
+                        template =&gt; 'form.tmpl',
+                    },
+               );</pre>
+<p>All other options besides <code>type</code> are passed to the constructor for that
+templating system verbatim, so you'll need to consult those docs to see what
+all the different options do. Skip down to <a href="#see_also">SEE ALSO</a>.</p>
+<p>
+</p>
+
+<h1><a name="subclassing_template_adapters">SUBCLASSING TEMPLATE ADAPTERS</a></h1>
+<p>In addition to the above included template engines, it is also possible to write
+your own rendering module. If you come up with something cool, please let the
+mailing list know!</p>
+<p>To do so, you need to write a module which has a sub called <code>render()</code>. This
+sub will be called by <strong>FormBuilder</strong> when <code>$form-&gt;render</code> is called. This
+sub can do basically whatever it wants, the only thing it has to do is return
+a scalar string which is the HTML to print out.</p>
+<p>This is actually not hard. Here's a simple adapter which would manipulate
+an <code>HTML::Template</code> style template:</p>
+<pre>
+    # This file is My/HTML/Template.pm
+    package My::HTML::Template;
+
+    use CGI::FormBuilder::Template::HTML;
+    use base 'CGI::FormBuilder::Template::HTML';
+
+    sub render {
+        my $self = shift;    # class object
+        my $form = shift;    # $form as only argument
+
+        # the template object (engine) lives here
+        my $tmpl = $self-&gt;engine;
+
+        # setup vars for our fields (objects)
+        for ($form-&gt;field) {
+            $tmpl-&gt;param($_ =&gt; $_-&gt;value);
+        }
+
+        # render output
+        my $html = $tmpl-&gt;output;
+
+        # return scalar;
+        return $html;
+    }
+    1;  # close module</pre>
+<p>Then in <strong>FormBuilder</strong>:</p>
+<pre>
+    use CGI::FormBuilder;
+    use My::HTML::Template;   # your module
+
+    my $tmpl = My::HTML::Template-&gt;new;
+
+    my $form = CGI::FormBuilder-&gt;new(
+                    fields   =&gt; [qw(name email)],
+                    header   =&gt; 1,
+                    template =&gt; $tmpl   # pass template object
+               );
+
+    # set our company from an extra CGI param
+    my $co = $form-&gt;cgi_param('company');
+    $tmpl-&gt;engine-&gt;param(company =&gt; $co);
+
+    # and render like normal
+    print $form-&gt;render;</pre>
+<p>That's it! For more details, the best thing to do is look through
+the guts of one of the existing template engines and go from there.</p>
+<p>
+</p>
+
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p><a href="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder.html">the CGI::FormBuilder manpage</a>, <a href="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/HTML.html">the CGI::FormBuilder::Template::HTML manpage</a>,
+<a href="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/Text.html">the CGI::FormBuilder::Template::Text manpage</a>, <a href="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/TT2.html">the CGI::FormBuilder::Template::TT2 manpage</a>,
+<a href="/download/CGI-FormBuilder-3.0501/docs/CGI/FormBuilder/Template/Fast.html">the CGI::FormBuilder::Template::Fast manpage</a></p>
+<p>
+</p>
+
+<h1><a name="revision">REVISION</a></h1>
+<p>$Id: Template.pm 100 2007-03-02 18:13:13Z nwiger $</p>
+<p>
+</p>
+
+<h1><a name="author">AUTHOR</a></h1>
+<p>Copyright (c) 2000-2006 Nate Wiger &lt;<a href="mailto:nate@wiger.org">nate@wiger.org</a>&gt;. All Rights Reserved.</p>
+<p>This module is free software; you may copy this under the terms of
+the GNU General Public License, or the Artistic License, copies of
+which should have accompanied your Perl kit.</p>
+
+
+
+
+</td></tr></table>
+<table width="100%" border="0" cellspacing="0" cellpadding="2" class="bar">
+<tr><td align="center" class="bar">
+FormBuilder is &copy; 2000-2006 <a href="/contrib/author.pl" class="bar">Nate Wiger</a>,
+with contributions from <a href="/contrib/" class="bar">many people</a>.
+</td></tr></table>
+<div align="center">
+<a href="http://www.nateware.com/"><img src="/images/nateware_powered.gif"
+ border="0" width="92" height="33" alt="Nateware" /></a>
+</div>
+</body></html>

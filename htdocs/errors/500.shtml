@@ -1,0 +1,5 @@
+<!--#include virtual="/layout/header.html"-->
+<p class="label">500 Server Error</p>
+Ooops! Big server boo-boo. You should probably tell
+the author (that's me) by <a href="/contrib/author.pl">clicking here</a>.
+<!--#include virtual="/layout/footer.html"-->

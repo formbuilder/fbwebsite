@@ -1,0 +1,4 @@
+<!--#include virtual="/layout/header.html"-->
+<p class="label">402 Payment Required</p>
+Not sure how you generated this, it's an undefined server code.
+<!--#include virtual="/layout/footer.html"-->
