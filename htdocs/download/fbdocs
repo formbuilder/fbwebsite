@@ -10,6 +10,7 @@ if [ $# -ne 1 ]; then
     exit 2
 fi
 
+PATH="`dirname $0`:$PATH"
 PKG='CGI-FormBuilder-'
 VER=$1
 DIR="$BASE/$PKG$VER"

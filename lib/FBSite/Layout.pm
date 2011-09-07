@@ -26,11 +26,10 @@ use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK $LAYOUT $FBSITE);
 
 $VERSION = do { my @r=(q$Revision: 1.9 $=~/\d+/g); sprintf "%d."."%02d"x$#r,@r };
-if ($^O =~ /Win/) {
-    $FBSITE = 'W:/vhosts/formbuilder.org';
-    $LAYOUT = "$FBSITE/htdocs/layout"; 
-} else {
-    $FBSITE = '/home/vhosts/formbuilder.org';
+
+use File::Basename;
+BEGIN {
+    $FBSITE = dirname(__FILE__) . "/../..";
     $LAYOUT = "$FBSITE/htdocs/layout";
 }
 
@@ -116,7 +115,7 @@ $Id: Layout.pm,v 1.9 2005/05/10 00:32:29 nwiger Exp $
 
 =head1 AUTHOR
 
-Copyright (c) 2002 Nathan Wiger <nate@sun.com>. All Rights Reserved.
+Copyright (c) L<Nate Wiger|http://nateware.com>. All Rights Reserved.
 
 This module is free software; you may copy this under the terms of
 the GNU General Public License, or the Artistic License, copies of

@@ -1,6 +1,10 @@
 #!/usr/bin/perl -s
 
-use lib '/home/httpd/vhosts/formbuilder.org/lib';
+BEGIN {
+    use File::Basename;
+    our $dir = dirname(__FILE__) . "/../../lib";
+    unshift @INC, $dir;
+}
 use FBSite::Layout;
 
 # Split on first <HR> to get linked a href list
