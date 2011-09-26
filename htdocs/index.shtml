@@ -14,12 +14,12 @@ the users mailing list</a> to learn more about FormBuilder.
 <p class="label">News</p>
 <xiframe align="right" src="/layout/paypal.html" width="200" height="100"
  frameborder="none" border="0"></xiframe>
-<b><i>09/07/2011</i> - FormBuilder 3.06 released</b> 
- Maintenance release with a couple new features: support for "charset: utf8"
+<b><i>09/17/2011</i> - FormBuilder 3.08 released</b> 
+ Refresh release with a couple new features: support for "charset: utf8"
  in <code>Source::File</code>, <code>add_before_option/add_after_option</code> c/o Victor Porton,
- and support for HTML5 type names c/o Wolfgang Radke.
- (<a href="/download/relnotes.pl?r=3.06">3.06 Release Notes</a>).
- <a href="/download/CGI-FormBuilder-3.06.tgz" class="mark">Download FormBuilder 3.06</a>.<br />
+ and support for HTML5 field types c/o Wolfgang Radke.
+ (<a href="/download/relnotes.pl?r=3.08">3.08 Release Notes</a>).
+ <a href="/download/CGI-FormBuilder-3.08.tgz" class="mark">Download FormBuilder 3.08</a>.<br />
  <p>
 <b><i>03/01/2007</i> - FormBuilder 3.0501 released</b> An important update that
 fixes a memory leak affecting Catalyst users

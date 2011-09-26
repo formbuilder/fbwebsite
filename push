@@ -1,0 +1,2 @@
+#!/bin/sh
+rsync -av --exclude=logs/ --delete `dirname $0`/ formbuilder.org:vhosts/formbuilder.org
